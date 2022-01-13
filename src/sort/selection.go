@@ -6,10 +6,10 @@ import (
 )
 
 type Selection struct {
-	slice Comparable
+	slice ComparableSlice
 }
 
-func (s *Selection) Sort() {
+func (s *Selection) sort() {
 	var n = s.slice.Length()
 	for i := 0; i < n; i++ {
 		var min = i
@@ -22,9 +22,9 @@ func (s *Selection) Sort() {
 	}
 }
 
-func SelectionSort(slice Comparable) {
+func SelectionSort(slice ComparableSlice) {
 	ts := time.Now()
 	selection := Selection{slice: slice}
-	selection.Sort()
+	selection.sort()
 	fmt.Println("selection sort time:", time.Since(ts))
 }

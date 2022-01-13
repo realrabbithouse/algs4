@@ -6,10 +6,11 @@ import (
 )
 
 type Insertion struct {
-	slice Comparable
+	slice ComparableSlice
 }
 
-func (s Insertion) Sort() {
+// This sort function is not a real Insertion policy.
+func (s Insertion) fakesort() {
 	var n = s.slice.Length()
 	for i := 1; i < n; i++ {
 		for j := 0; j < i; j++ {
@@ -20,7 +21,7 @@ func (s Insertion) Sort() {
 	}
 }
 
-func (s Insertion) ConnSort() {
+func (s Insertion) sort() {
 	var n = s.slice.Length()
 	for i := 1; i < n; i++ {
 		/*// Note: this section is buggy!
@@ -29,14 +30,18 @@ func (s Insertion) ConnSort() {
 		}*/
 
 		for j := i; j > 0 && s.slice.Compare(j, j-1); j-- {
-			s.slice.Swap(j, j-1)
+			if !s.slice.Compare(j-1, j) {
+				s.slice.Swap(j, j-1)
+			} else {
+				break
+			}
 		}
 	}
 }
 
-func InsertionSort(slice Comparable) {
+func InsertionSort(slice ComparableSlice) {
 	ts := time.Now()
 	insertion := Insertion{slice: slice}
-	insertion.ConnSort()
+	insertion.sort()
 	fmt.Println("insertion sort time:", time.Since(ts))
 }
