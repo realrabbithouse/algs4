@@ -27,6 +27,16 @@ func (s IntSlice) IsSorted() bool {
 	}
 	return true
 }
+func (s IntSlice) New(sz int) ComparableSlice {
+	return IntSlice(make([]int, sz))
+}
+func (s IntSlice) Copy() ComparableSlice {
+	cp := make([]int, s.Length())
+	for i := range s {
+		cp[i] = s[i]
+	}
+	return IntSlice(cp)
+}
 
 type StringSlice []string
 
@@ -47,4 +57,14 @@ func (s StringSlice) IsSorted() bool {
 		}
 	}
 	return true
+}
+func (s StringSlice) New(sz int) ComparableSlice {
+	return StringSlice(make([]string, sz))
+}
+func (s StringSlice) Copy() ComparableSlice {
+	cp := make([]string, s.Length())
+	for i := range s {
+		cp[i] = s[i]
+	}
+	return StringSlice(cp)
 }
