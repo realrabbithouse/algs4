@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func WriteRandomNumToFile(path string, max, count int) error {
+func WriteRandomNumsToFile(path string, max, count int) error {
 	rand.Seed(time.Now().UnixNano())
 	f, err := os.Create(path)
 	if err != nil {
@@ -25,7 +25,7 @@ func WriteRandomNumToFile(path string, max, count int) error {
 	return nil
 }
 
-func GenRandomNum(max, count int) (ret []int) {
+func GenRandomNums(max, count int) (ret []int) {
 	rand.Seed(time.Now().UnixNano())
 	ret = make([]int, count)
 	for i := 0; i < count; i++ {
@@ -34,7 +34,7 @@ func GenRandomNum(max, count int) (ret []int) {
 	return
 }
 
-func ReadNumFromFile(path string) (ret []int, err error) {
+func ReadNumsFromFile(path string) (ret []int, err error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, fmt.Errorf("open file err: %q", err)

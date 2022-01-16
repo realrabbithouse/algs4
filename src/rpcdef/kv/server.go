@@ -43,7 +43,7 @@ func registerService(svc ServiceSignature) error {
 	return rpc.RegisterName(serviceName, svc)
 }
 
-func RunServer() error {
+func RunServer() {
 	err := registerService(&Handler{
 		mu: sync.Mutex{},
 		kv: make(map[string]string),

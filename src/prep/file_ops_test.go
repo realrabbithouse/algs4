@@ -9,21 +9,21 @@ import (
 func TestWriteRandomNumToFile(t *testing.T) {
 	max, count := 8192, 4096
 	fname := fmt.Sprintf("rand%d.out", count)
-	err := WriteRandomNumToFile(fname, max, count)
+	err := WriteRandomNumsToFile(fname, max, count)
 	if err != nil {
-		log.Fatal("WriteRandomNumToFile err:", err)
+		log.Fatal("WriteRandomNumsToFile err:", err)
 	}
 }
 
 func TestGenRandomNum(t *testing.T) {
-	nums := GenRandomNum(256, 256)
+	nums := GenRandomNums(256, 256)
 	fmt.Println(nums)
 }
 
 func TestReadNumFromFile(t *testing.T) {
-	nums, err := ReadNumFromFile("rand256.out")
+	nums, err := ReadNumsFromFile("rand256.out")
 	if err != nil {
-		log.Fatal("ReadNumFromFile err:", err)
+		log.Fatal("ReadNumsFromFile err:", err)
 	}
 	fmt.Println(nums)
 }
