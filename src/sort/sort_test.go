@@ -86,7 +86,24 @@ func TestMergeSort(t *testing.T) {
 
 	input := IntSlice(prep.GenRandomNums(65536, 65536))
 
-	MergeSort(input)
+	MergeSortInt(input)
 	fmt.Println("is sorted?", input.IsSorted())
 	//fmt.Println(input)
+}
+
+func TestQuick(t *testing.T) {
+	//input := IntSlice{1, 32, 3, 52, 42, 563456, 34, 534, 98, 2, 234, 5345, 65, 2, 676}
+	//input := IntSlice{10, 9, 9, 8, 7, 7, 6, 5, 5, 4, 3, 3, 2, 1}
+
+	//nums, err := prep.ReadNumFromFile("../prep/rand4096.out")
+	//input := IntSlice(nums)
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+
+	input := IntSlice(prep.GenRandomNums(65536, 65536))
+
+	QuickSortInt(input)
+	fmt.Println("is sorted?", input.IsSorted())
+	fmt.Println(input)
 }

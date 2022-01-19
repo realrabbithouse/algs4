@@ -10,7 +10,7 @@ type Bubble struct {
 }
 
 func (s Bubble) sort() {
-	var n = s.slice.Length()
+	var n = s.slice.Len()
 	for i := n; i > 1; i-- {
 		for j := 0; j < i-1; j++ {
 			if !s.slice.Compare(j, j+1) {

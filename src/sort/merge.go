@@ -44,11 +44,11 @@ func (s IntSliceMergeSort) sortHelper(aux IntSlice, low, high int) {
 }
 
 func (s IntSliceMergeSort) sort() {
-	aux := s.New(s.Length())
-	s.sortHelper(aux.(IntSlice), 0, s.Length()-1)
+	aux := s.New(s.Len())
+	s.sortHelper(aux.(IntSlice), 0, s.Len()-1)
 }
 
-func MergeSort(slice IntSlice) {
+func MergeSortInt(slice []int) {
 	ts := time.Now()
 	merge := IntSliceMergeSort{slice}
 	merge.sort()

@@ -11,7 +11,7 @@ type Insertion struct {
 
 // This sort function is not a real Insertion policy.
 func (s Insertion) fakesort() {
-	var n = s.slice.Length()
+	var n = s.slice.Len()
 	for i := 1; i < n; i++ {
 		for j := 0; j < i; j++ {
 			if s.slice.Compare(i, j) {
@@ -22,14 +22,14 @@ func (s Insertion) fakesort() {
 }
 
 func (s Insertion) sort() {
-	var n = s.slice.Length()
+	var n = s.slice.Len()
 	for i := 1; i < n; i++ {
 		/*// Note: this section is buggy!
 		for j := 0; j < i && s.slice.Compare(j+1, j); j++ {
 			s.slice.Swap(j+1, j)
 		}*/
 
-		for j := i; j > 0 && s.slice.Compare(j, j-1); j-- {
+		for j := i; j > 0; j-- {
 			if !s.slice.Compare(j-1, j) {
 				s.slice.Swap(j, j-1)
 			} else {

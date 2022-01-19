@@ -10,7 +10,7 @@ type Selection struct {
 }
 
 func (s *Selection) sort() {
-	var n = s.slice.Length()
+	var n = s.slice.Len()
 	for i := 0; i < n; i++ {
 		var min = i
 		for j := i + 1; j < n; j++ {
