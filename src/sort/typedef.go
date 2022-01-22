@@ -68,3 +68,46 @@ func (s StringSlice) Copy() ComparableSlice {
 	}
 	return StringSlice(cp)
 }
+
+// ********************************************************************* //
+
+// Comparable defines the interface for comparable objects.
+type Comparable interface {
+	CompareTo(Comparable) int
+}
+
+type ComparableInt int
+
+func (c ComparableInt) CompareTo(obj Comparable) int {
+	if c < obj.(ComparableInt) {
+		return -1
+	} else if c > obj.(ComparableInt) {
+		return 1
+	} else {
+		return 0
+	}
+}
+
+type ComparableString string
+
+func (c ComparableString) CompareTo(obj Comparable) int {
+	if c < obj.(ComparableString) {
+		return -1
+	} else if c > obj.(ComparableString) {
+		return 1
+	} else {
+		return 0
+	}
+}
+
+type ComparableFloat64 float64
+
+func (c ComparableFloat64) CompareTo(obj Comparable) int {
+	if c < obj.(ComparableFloat64) {
+		return -1
+	} else if c > obj.(ComparableFloat64) {
+		return 1
+	} else {
+		return 0
+	}
+}

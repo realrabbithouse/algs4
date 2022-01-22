@@ -107,3 +107,18 @@ func TestQuick(t *testing.T) {
 	fmt.Println("is sorted?", input.IsSorted())
 	fmt.Println(input)
 }
+
+func TestMaxPQ(t *testing.T) {
+	input := IntSlice(prep.GenRandomNums(40000000, 20000000))
+	//fmt.Println("input:", input)
+	keys := make([]Comparable, len(input))
+	for i := range input {
+		keys[i] = ComparableInt(input[i])
+	}
+	maxPQ := NewMaxPQWithKeys(keys)
+	fmt.Println("is initial heap ok?", maxPQ.isMaxHeap())
+	fmt.Println("max element:", maxPQ.Max())
+	fmt.Println("top 10:", maxPQ.TopK(10))
+	fmt.Println("is still max heap?", maxPQ.isMaxHeap())
+	fmt.Println("number of elements left:", maxPQ.Size())
+}
