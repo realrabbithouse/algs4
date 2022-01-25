@@ -10,12 +10,12 @@ type MaxPQ struct {
 	pq []Comparable
 }
 
-func NewMaxPQ() *MaxPQ {
-	return &MaxPQ{
-		n:  0,
-		pq: []Comparable{nil},
-	}
-}
+//func NewMaxPQ() *MaxPQ {
+//	return &MaxPQ{
+//		n:  0,
+//		pq: []Comparable{nil},
+//	}
+//}
 
 func NewMaxPQWithCap(initCap int) *MaxPQ {
 	pq := make([]Comparable, 1, initCap+1)

@@ -116,9 +116,21 @@ func TestMaxPQ(t *testing.T) {
 		keys[i] = ComparableInt(input[i])
 	}
 	maxPQ := NewMaxPQWithKeys(keys)
-	fmt.Println("is initial heap ok?", maxPQ.isMaxHeap())
+	fmt.Println("is binary heap ok?", maxPQ.isMaxHeap())
 	fmt.Println("max element:", maxPQ.Max())
 	fmt.Println("top 10:", maxPQ.TopK(10))
 	fmt.Println("is still max heap?", maxPQ.isMaxHeap())
 	fmt.Println("number of elements left:", maxPQ.Size())
+}
+
+func TestHeap(t *testing.T) {
+	input := IntSlice(prep.GenRandomNums(4000000, 2000000))
+	//fmt.Println("input:", input)
+	keys := make([]Comparable, len(input))
+	for i := range input {
+		keys[i] = ComparableInt(input[i])
+	}
+	h := Heap{pq: keys}
+	h.Sort()
+	h.Show()
 }

@@ -5,19 +5,20 @@ import (
 	"time"
 )
 
+// Shell is an optimized version of insertion sort.
 type Shell struct {
 	slice ComparableSlice
 }
 
 func (s Shell) sort() {
-	n := s.slice.Length()
+	n := s.slice.Len()
 	for i := n / 3; i > 0; i /= 3 {
 		s.hGapSort(i)
 	}
 }
 
 func (s Shell) hGapSort(h int) {
-	n := s.slice.Length()
+	n := s.slice.Len()
 	for i := h; i < n; i++ {
 		for j := i; j >= h; j = j - h {
 			if !s.slice.Compare(j-h, j) {
