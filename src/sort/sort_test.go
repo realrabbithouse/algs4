@@ -123,6 +123,33 @@ func TestMaxPQ(t *testing.T) {
 	fmt.Println("number of elements left:", maxPQ.Size())
 }
 
+func TestIndexMinPQ(t *testing.T) {
+	input := IntSlice(prep.GenRandomNums(20, 5))
+	//input = IntSlice{1, 2, 3, 4, 5}
+	fmt.Println("input:", input)
+	keys := make([]Comparable, len(input))
+	for i := range input {
+		keys[i] = ComparableInt(input[i])
+	}
+	minPQ := NewIndexMinPQWithKeys(keys)
+	fmt.Println("qp:", minPQ.qp)
+	fmt.Println("pq:", minPQ.pq)
+	fmt.Println("keys:", minPQ.keys)
+	fmt.Println("min key:", minPQ.MinKey())
+	fmt.Println("min index:", minPQ.MinIndex())
+	//for i := 0; i < len(keys); i++ {
+	//	fmt.Println(i, minPQ.KeyOf(i))
+	//}
+	fmt.Println("delete min:", minPQ.DelMin())
+	fmt.Println("qp:", minPQ.qp)
+	fmt.Println("pq:", minPQ.pq)
+	fmt.Println("keys:", minPQ.keys)
+	fmt.Println("delete min:", minPQ.DelMin())
+	fmt.Println("qp:", minPQ.qp)
+	fmt.Println("pq:", minPQ.pq)
+	fmt.Println("keys:", minPQ.keys)
+}
+
 func TestHeap(t *testing.T) {
 	input := IntSlice(prep.GenRandomNums(4000000, 2000000))
 	//fmt.Println("input:", input)
