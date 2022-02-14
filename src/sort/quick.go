@@ -30,6 +30,7 @@ func (q IntSliceQuickSort) partition(lo, hi int) int {
 		}
 		q.IntSlice[i], q.IntSlice[j] = q.IntSlice[j], q.IntSlice[i]
 	}
+	// s[j] < s[lo], s[>j] > s[lo]
 	q.IntSlice[lo], q.IntSlice[j] = q.IntSlice[j], q.IntSlice[lo]
 	//fmt.Println("after partition:", q.IntSlice, "seed:", j)
 	return j

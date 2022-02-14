@@ -37,7 +37,7 @@ func (s IntSliceMergeSort) sortHelper(aux IntSlice, low, high int) {
 	if high <= low {
 		return
 	}
-	mid := (low + high) / 2
+	mid := low + (high-low)/2
 	s.sortHelper(aux, low, mid)
 	s.sortHelper(aux, mid+1, high)
 	s.merge(aux, low, mid, high)

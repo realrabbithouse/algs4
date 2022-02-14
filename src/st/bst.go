@@ -279,7 +279,7 @@ func (bst BST) Rank(key Key) int {
 	return rank(bst.root, key)
 }
 
-// Get all keys in the symbol table in the given range. //
+// Get all keys in the symbol table in given range. //
 
 func keys(node *Node, lo, hi Key, sli *[]Key) {
 	if node == nil {
