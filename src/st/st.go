@@ -17,7 +17,7 @@ type ST interface {
 	Floor(key Key) Key   // 小于等于key的最大键
 	Ceiling(key Key) Key // 大于等于key的最小键
 	Rank(key Key) int    // 小于key的键的数量
-	Choose(k int) Key    // 排名为k的键
+	Choose(k int) Key    // 排名为k的键，k = 0,1,2...
 	DeleteMin()
 	DeleteMax()
 }
