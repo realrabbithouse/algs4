@@ -6,9 +6,9 @@ import (
 )
 
 type IndexMinPQ struct {
-	maxN int
-	n    int
-	keys []Comparable // 输入的原始数组
+	maxN int          // max allowed elements number
+	n    int          // current element number
+	keys []Comparable // input data
 	pq   []int        // sorted index in priority queue (sorted index -> original index)
 	qp   []int        // original index -> sorted index
 }
@@ -70,6 +70,21 @@ func (minPQ *IndexMinPQ) Insert(i int, key Comparable) {
 	minPQ.pq[minPQ.n] = i
 	minPQ.keys[i] = key
 	minPQ.swim(minPQ.n)
+}
+
+func (minPQ *IndexMinPQ) Change(i int, key Comparable) {
+	err := minPQ.validateIndex(i)
+	if err != nil {
+		fmt.Println("Change error:", err)
+		return
+	}
+	if !minPQ.Contains(i) {
+		fmt.Println("Change error: index is not existed in the priority queue")
+		return
+	}
+	minPQ.keys[i] = key
+	minPQ.swim(minPQ.qp[i])
+	minPQ.sink(minPQ.qp[i])
 }
 
 func (minPQ IndexMinPQ) less(i, j int) bool {

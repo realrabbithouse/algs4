@@ -3,7 +3,7 @@ package str
 type KMP struct {
 	R   int
 	m   int
-	dfa [][]int
+	dfa [][]int // 状态机
 }
 
 func makeDFA(R, N int) [][]int {

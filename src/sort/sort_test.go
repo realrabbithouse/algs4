@@ -137,6 +137,12 @@ func TestIndexMinPQ(t *testing.T) {
 	fmt.Println("keys:", minPQ.keys)
 	fmt.Println("min key:", minPQ.MinKey())
 	fmt.Println("min index:", minPQ.MinIndex())
+	minPQ.Change(3, ComparableInt(10010))
+	fmt.Println("qp:", minPQ.qp)
+	fmt.Println("pq:", minPQ.pq)
+	fmt.Println("keys:", minPQ.keys)
+	fmt.Println("min key:", minPQ.MinKey())
+	fmt.Println("min index:", minPQ.MinIndex())
 	//for i := 0; i < len(keys); i++ {
 	//	fmt.Println(i, minPQ.KeyOf(i))
 	//}
