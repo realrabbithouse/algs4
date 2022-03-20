@@ -210,6 +210,7 @@ func (t *BTree) Put(key rabbit.Comparable, val interface{}) {
 			val:  nil,
 			next: r,
 		}
+		x.isExternal = false
 		t.root = x
 		t.height++
 	}

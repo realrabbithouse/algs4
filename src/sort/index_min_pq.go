@@ -73,7 +73,7 @@ func (minPQ *IndexMinPQ) Insert(i int, key rabbit.Comparable) {
 	minPQ.swim(minPQ.n)
 }
 
-func (minPQ *IndexMinPQ) Change(i int, key Comparable) {
+func (minPQ *IndexMinPQ) Change(i int, key rabbit.Comparable) {
 	err := minPQ.validateIndex(i)
 	if err != nil {
 		fmt.Println("Change error:", err)
