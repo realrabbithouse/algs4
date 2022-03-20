@@ -73,6 +73,21 @@ func (minPQ *IndexMinPQ) Insert(i int, key rabbit.Comparable) {
 	minPQ.swim(minPQ.n)
 }
 
+func (minPQ *IndexMinPQ) Change(i int, key Comparable) {
+	err := minPQ.validateIndex(i)
+	if err != nil {
+		fmt.Println("Change error:", err)
+		return
+	}
+	if !minPQ.Contains(i) {
+		fmt.Println("Change error: index is not existed in the priority queue")
+		return
+	}
+	minPQ.keys[i] = key
+	minPQ.swim(minPQ.qp[i])
+	minPQ.sink(minPQ.qp[i])
+}
+
 func (minPQ IndexMinPQ) less(i, j int) bool {
 	cmp := minPQ.keys[minPQ.pq[i]].CompareTo(minPQ.keys[minPQ.pq[j]])
 	return cmp < 0
