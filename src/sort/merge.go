@@ -1,17 +1,18 @@
 package sort
 
 import (
+	"algs4/src/rabbit"
 	"fmt"
 	"time"
 )
 
 // IntSliceMergeSort 涉及到赋值，拷贝，无法仅使用三个通用接口实现
 type IntSliceMergeSort struct {
-	IntSlice
+	rabbit.IntSlice
 }
 
 // merge the first (low to mid) and the second (mid + 1 to high) sorted part into one sorted array.
-func (s IntSliceMergeSort) merge(aux IntSlice, low, mid, high int) {
+func (s IntSliceMergeSort) merge(aux rabbit.IntSlice, low, mid, high int) {
 	for i := low; i <= high; i++ {
 		aux[i] = s.IntSlice[i]
 	}
@@ -33,7 +34,7 @@ func (s IntSliceMergeSort) merge(aux IntSlice, low, mid, high int) {
 	}
 }
 
-func (s IntSliceMergeSort) sortHelper(aux IntSlice, low, high int) {
+func (s IntSliceMergeSort) sortHelper(aux rabbit.IntSlice, low, high int) {
 	if high <= low {
 		return
 	}
@@ -45,7 +46,7 @@ func (s IntSliceMergeSort) sortHelper(aux IntSlice, low, high int) {
 
 func (s IntSliceMergeSort) sort() {
 	aux := s.New(s.Len())
-	s.sortHelper(aux.(IntSlice), 0, s.Len()-1)
+	s.sortHelper(aux.(rabbit.IntSlice), 0, s.Len()-1)
 }
 
 func MergeSortInt(slice []int) {

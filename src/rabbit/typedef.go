@@ -1,5 +1,6 @@
-package sort
+package rabbit
 
+// ComparableSlice is the interface that wraps the comparable slice objects for sorting.
 type ComparableSlice interface {
 	Swap(i, j int)
 	Compare(i, j int) bool
@@ -69,11 +70,33 @@ func (s StringSlice) Copy() ComparableSlice {
 	return StringSlice(cp)
 }
 
-// ********************************************************************* //
+// ******************************************************************************************* //
 
-// Comparable defines the interface for comparable objects.
+// Comparable is the interface that wraps the compare method for comparable objects.
 type Comparable interface {
 	CompareTo(Comparable) int
+}
+
+func Equal(left, right Comparable) bool {
+	return left.CompareTo(right) == 0
+}
+
+func Less(left, right Comparable) bool {
+	return left.CompareTo(right) < 0
+}
+
+func LessEqual(left, right Comparable) bool {
+	res := left.CompareTo(right)
+	return res <= 0
+}
+
+func Greater(left, right Comparable) bool {
+	return left.CompareTo(right) > 0
+}
+
+func GreaterEqual(left, right Comparable) bool {
+	res := left.CompareTo(right)
+	return res >= 0
 }
 
 type ComparableInt int

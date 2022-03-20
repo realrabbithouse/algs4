@@ -2,6 +2,7 @@ package sort
 
 import (
 	"algs4/src/prep"
+	"algs4/src/rabbit"
 	"fmt"
 	"testing"
 )
@@ -16,7 +17,7 @@ func TestSelectionSort(t *testing.T) {
 	//	log.Fatal(err)
 	//}
 
-	input := IntSlice(prep.GenRandomNums(65536, 8192*8))
+	input := rabbit.IntSlice(prep.GenRandomNums(65536, 8192*8))
 
 	SelectionSort(input)
 	fmt.Println("is sorted?", input.IsSorted())
@@ -33,7 +34,7 @@ func TestInsertionSort(t *testing.T) {
 	//	log.Fatal(err)
 	//}
 
-	input := IntSlice(prep.GenRandomNums(65536, 8192*8))
+	input := rabbit.IntSlice(prep.GenRandomNums(65536, 8192*8))
 
 	InsertionSort(input)
 	fmt.Println("is sorted?", input.IsSorted())
@@ -50,7 +51,7 @@ func TestBubbleSort(t *testing.T) {
 	//	log.Fatal(err)
 	//}
 
-	input := IntSlice(prep.GenRandomNums(65536, 8192))
+	input := rabbit.IntSlice(prep.GenRandomNums(65536, 8192))
 
 	BubbleSort(input)
 	fmt.Println("is sorted?", input.IsSorted())
@@ -67,7 +68,7 @@ func TestShellSort(t *testing.T) {
 	//	log.Fatal(err)
 	//}
 
-	input := IntSlice(prep.GenRandomNums(65536, 8192*8))
+	input := rabbit.IntSlice(prep.GenRandomNums(65536, 8192*8))
 
 	ShellSort(input)
 	fmt.Println("is sorted?", input.IsSorted())
@@ -84,7 +85,7 @@ func TestMergeSort(t *testing.T) {
 	//	log.Fatal(err)
 	//}
 
-	input := IntSlice(prep.GenRandomNums(65536, 65536))
+	input := rabbit.IntSlice(prep.GenRandomNums(65536, 65536))
 
 	MergeSortInt(input)
 	fmt.Println("is sorted?", input.IsSorted())
@@ -101,7 +102,7 @@ func TestQuick(t *testing.T) {
 	//	log.Fatal(err)
 	//}
 
-	input := IntSlice(prep.GenRandomNums(65536, 65536))
+	input := rabbit.IntSlice(prep.GenRandomNums(65536, 65536))
 
 	QuickSortInt(input)
 	fmt.Println("is sorted?", input.IsSorted())
@@ -109,11 +110,11 @@ func TestQuick(t *testing.T) {
 }
 
 func TestMaxPQ(t *testing.T) {
-	input := IntSlice(prep.GenRandomNums(40000000, 20000000))
+	input := rabbit.IntSlice(prep.GenRandomNums(40000000, 20000000))
 	//fmt.Println("input:", input)
-	keys := make([]Comparable, len(input))
+	keys := make([]rabbit.Comparable, len(input))
 	for i := range input {
-		keys[i] = ComparableInt(input[i])
+		keys[i] = rabbit.ComparableInt(input[i])
 	}
 	maxPQ := NewMaxPQWithKeys(keys)
 	fmt.Println("is binary heap ok?", maxPQ.isMaxHeap())
@@ -124,12 +125,12 @@ func TestMaxPQ(t *testing.T) {
 }
 
 func TestIndexMinPQ(t *testing.T) {
-	input := IntSlice(prep.GenRandomNums(20, 5))
+	input := rabbit.IntSlice(prep.GenRandomNums(20, 5))
 	//input = IntSlice{1, 2, 3, 4, 5}
 	fmt.Println("input:", input)
-	keys := make([]Comparable, len(input))
+	keys := make([]rabbit.Comparable, len(input))
 	for i := range input {
-		keys[i] = ComparableInt(input[i])
+		keys[i] = rabbit.ComparableInt(input[i])
 	}
 	minPQ := NewIndexMinPQWithKeys(keys)
 	fmt.Println("qp:", minPQ.qp)
@@ -151,11 +152,11 @@ func TestIndexMinPQ(t *testing.T) {
 }
 
 func TestHeap(t *testing.T) {
-	input := IntSlice(prep.GenRandomNums(4000000, 2000000))
+	input := rabbit.IntSlice(prep.GenRandomNums(4000000, 2000000))
 	//fmt.Println("input:", input)
-	keys := make([]Comparable, len(input))
+	keys := make([]rabbit.Comparable, len(input))
 	for i := range input {
-		keys[i] = ComparableInt(input[i])
+		keys[i] = rabbit.ComparableInt(input[i])
 	}
 	h := Heap{pq: keys}
 	h.Sort()

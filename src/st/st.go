@@ -1,9 +1,13 @@
 package st
 
-import "algs4/src/sort"
+import (
+	"algs4/src/rabbit"
+)
 
-type Key sort.Comparable
-type Value interface{}
+type (
+	Key   rabbit.Comparable
+	Value interface{}
+)
 
 type ST interface {
 	Contains(key Key) bool

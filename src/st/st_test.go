@@ -1,35 +1,35 @@
 package st
 
 import (
-	"algs4/src/sort"
+	"algs4/src/rabbit"
 	"fmt"
 	"testing"
 )
 
 func TestBST(t *testing.T) {
 	bst := BST{}
-	bst.Put(sort.ComparableString("hello"), "Hello")
-	bst.Put(sort.ComparableString("world"), "World")
-	bst.Put(sort.ComparableString("apple"), "Apple")
-	bst.Put(sort.ComparableString("banana"), "Banana")
-	bst.Put(sort.ComparableString("cat"), "Cat")
-	bst.Put(sort.ComparableString("dodge"), "Dodge")
-	bst.Put(sort.ComparableString("earth"), "Earth")
-	bst.Put(sort.ComparableString("father"), "Father")
-	bst.Put(sort.ComparableString("great"), "Great")
-	bst.Put(sort.ComparableString("help"), "Help")
-	bst.Put(sort.ComparableString("i"), "I")
-	bst.Put(sort.ComparableString("job"), "Job")
-	bst.Put(sort.ComparableString("kick"), "Kick")
+	bst.Put(rabbit.ComparableString("hello"), "Hello")
+	bst.Put(rabbit.ComparableString("world"), "World")
+	bst.Put(rabbit.ComparableString("apple"), "Apple")
+	bst.Put(rabbit.ComparableString("banana"), "Banana")
+	bst.Put(rabbit.ComparableString("cat"), "Cat")
+	bst.Put(rabbit.ComparableString("dodge"), "Dodge")
+	bst.Put(rabbit.ComparableString("earth"), "Earth")
+	bst.Put(rabbit.ComparableString("father"), "Father")
+	bst.Put(rabbit.ComparableString("great"), "Great")
+	bst.Put(rabbit.ComparableString("help"), "Help")
+	bst.Put(rabbit.ComparableString("i"), "I")
+	bst.Put(rabbit.ComparableString("job"), "Job")
+	bst.Put(rabbit.ComparableString("kick"), "Kick")
 	fmt.Println("min:", bst.Min())
 	fmt.Println("max:", bst.Max())
 	fmt.Println(bst.ToSlice())
-	bst.Delete(sort.ComparableString("hello"))
-	bst.Delete(sort.ComparableString("world"))
+	bst.Delete(rabbit.ComparableString("hello"))
+	bst.Delete(rabbit.ComparableString("world"))
 	fmt.Println(bst.ToSlice())
-	fmt.Println("floor of danger:", bst.Floor(sort.ComparableString("danger")))
-	fmt.Println("ceiling of danger:", bst.Ceiling(sort.ComparableString("danger")))
-	fmt.Println("rank of danger:", bst.Rank(sort.ComparableString("danger")))
+	fmt.Println("floor of danger:", bst.Floor(rabbit.ComparableString("danger")))
+	fmt.Println("ceiling of danger:", bst.Ceiling(rabbit.ComparableString("danger")))
+	fmt.Println("rank of danger:", bst.Rank(rabbit.ComparableString("danger")))
 	fmt.Println("choose 3:", bst.Choose(3))
-	fmt.Println("kick:", bst.Get(sort.ComparableString("kick")))
+	fmt.Println("kick:", bst.Get(rabbit.ComparableString("kick")))
 }

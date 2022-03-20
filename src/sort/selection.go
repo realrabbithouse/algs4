@@ -1,12 +1,13 @@
 package sort
 
 import (
+	"algs4/src/rabbit"
 	"fmt"
 	"time"
 )
 
 type Selection struct {
-	slice ComparableSlice
+	slice rabbit.ComparableSlice
 }
 
 func (s *Selection) sort() {
@@ -22,7 +23,7 @@ func (s *Selection) sort() {
 	}
 }
 
-func SelectionSort(slice ComparableSlice) {
+func SelectionSort(slice rabbit.ComparableSlice) {
 	ts := time.Now()
 	selection := Selection{slice: slice}
 	selection.sort()
