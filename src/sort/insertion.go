@@ -1,12 +1,13 @@
 package sort
 
 import (
+	"algs4/src/rabbit"
 	"fmt"
 	"time"
 )
 
 type Insertion struct {
-	slice ComparableSlice
+	slice rabbit.ComparableSlice
 }
 
 // This sort function is not a real Insertion policy.
@@ -39,7 +40,7 @@ func (s Insertion) sort() {
 	}
 }
 
-func InsertionSort(slice ComparableSlice) {
+func InsertionSort(slice rabbit.ComparableSlice) {
 	ts := time.Now()
 	insertion := Insertion{slice: slice}
 	insertion.sort()

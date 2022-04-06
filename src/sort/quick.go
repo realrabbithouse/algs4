@@ -1,12 +1,13 @@
 package sort
 
 import (
+	"algs4/src/rabbit"
 	"fmt"
 	"time"
 )
 
 type IntSliceQuickSort struct {
-	IntSlice
+	rabbit.IntSlice
 }
 
 func (q IntSliceQuickSort) partition(lo, hi int) int {

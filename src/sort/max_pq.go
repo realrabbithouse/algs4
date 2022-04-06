@@ -1,13 +1,14 @@
 package sort
 
 import (
+	"algs4/src/rabbit"
 	"fmt"
 	"time"
 )
 
 type MaxPQ struct {
 	n  int
-	pq []Comparable
+	pq []rabbit.Comparable
 }
 
 //func NewMaxPQ() *MaxPQ {
@@ -18,7 +19,7 @@ type MaxPQ struct {
 //}
 
 func NewMaxPQWithCap(initCap int) *MaxPQ {
-	pq := make([]Comparable, 1, initCap+1)
+	pq := make([]rabbit.Comparable, 1, initCap+1)
 	pq[0] = nil
 	return &MaxPQ{
 		n:  0,
@@ -26,7 +27,7 @@ func NewMaxPQWithCap(initCap int) *MaxPQ {
 	}
 }
 
-func NewMaxPQWithKeys(keys []Comparable) *MaxPQ {
+func NewMaxPQWithKeys(keys []rabbit.Comparable) *MaxPQ {
 	ts := time.Now()
 	maxPQ := NewMaxPQWithCap(len(keys))
 	for i := range keys {
@@ -36,20 +37,20 @@ func NewMaxPQWithKeys(keys []Comparable) *MaxPQ {
 	return maxPQ
 }
 
-func (q *MaxPQ) Insert(v Comparable) {
+func (q *MaxPQ) Insert(v rabbit.Comparable) {
 	q.pq = append(q.pq, v)
 	q.n++
 	q.swim(q.n)
 }
 
-func (q *MaxPQ) Max() Comparable {
+func (q *MaxPQ) Max() rabbit.Comparable {
 	if q.n == 0 {
 		panic("priority queue underflow")
 	}
 	return q.pq[1]
 }
 
-func (q *MaxPQ) DelMax() Comparable {
+func (q *MaxPQ) DelMax() rabbit.Comparable {
 	if q.n == 0 {
 		panic("priority queue underflow")
 	}
@@ -131,12 +132,12 @@ func (q MaxPQ) isMaxHeapOrdered() bool {
 	return true
 }
 
-func (q *MaxPQ) TopK(k int) []Comparable {
+func (q *MaxPQ) TopK(k int) []rabbit.Comparable {
 	if k > q.n {
 		fmt.Println("elements in priority queue not enough")
 		return nil
 	}
-	topK := make([]Comparable, 0, k)
+	topK := make([]rabbit.Comparable, 0, k)
 	for i := 0; i < k; i++ {
 		topK = append(topK, q.DelMax())
 	}
