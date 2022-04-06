@@ -138,7 +138,7 @@ func TestIndexMinPQ(t *testing.T) {
 	fmt.Println("keys:", minPQ.keys)
 	fmt.Println("min key:", minPQ.MinKey())
 	fmt.Println("min index:", minPQ.MinIndex())
-	minPQ.Change(3, ComparableInt(10010))
+	minPQ.Change(3, rabbit.ComparableInt(10010))
 	fmt.Println("qp:", minPQ.qp)
 	fmt.Println("pq:", minPQ.pq)
 	fmt.Println("keys:", minPQ.keys)
