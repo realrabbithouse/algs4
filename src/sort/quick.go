@@ -11,6 +11,7 @@ type IntSliceQuickSort struct {
 
 func (q IntSliceQuickSort) partition(lo, hi int) int {
 	//fmt.Println("before partition:", q.IntSlice)
+	// 双指针，找到第一个大于v的i，和第一个小于v的j，然后交换它们
 	i, j := lo+1, hi
 	v := q.IntSlice[lo]
 	for {

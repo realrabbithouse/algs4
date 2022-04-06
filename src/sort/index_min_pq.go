@@ -92,6 +92,7 @@ func (minPQ IndexMinPQ) less(i, j int) bool {
 	return cmp < 0
 }
 
+// swap invariance: qp[pq[i]] = pq[qp[i]] = i
 func (minPQ *IndexMinPQ) swap(i, j int) {
 	minPQ.qp[minPQ.pq[i]], minPQ.qp[minPQ.pq[j]] = minPQ.qp[minPQ.pq[j]], minPQ.qp[minPQ.pq[i]]
 	minPQ.pq[i], minPQ.pq[j] = minPQ.pq[j], minPQ.pq[i]

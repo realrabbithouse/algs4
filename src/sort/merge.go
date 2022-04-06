@@ -5,9 +5,13 @@ import (
 	"time"
 )
 
+//
+// 思路：逐渐拆分成更小的part，然后再merge，用一个辅组数组将merge的结果写回
+//
+
 // IntSliceMergeSort 涉及到赋值，拷贝，无法仅使用三个通用接口实现
 type IntSliceMergeSort struct {
-	IntSlice
+	IntSlice // FIXME: 不是一个好的实践
 }
 
 // merge the first (low to mid) and the second (mid + 1 to high) sorted part into one sorted array.
