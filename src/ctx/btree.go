@@ -216,6 +216,7 @@ func (t *BTree) Put(key rabbit.Comparable, val interface{}) {
 	}
 }
 
+// validate buggy! 因为最左侧节点并不一定满足这个约束
 func validate(node *node, lo rabbit.Comparable) (err error) {
 	if node.isExternal {
 		for i := uint32(0); i < node.x; i++ {

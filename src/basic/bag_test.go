@@ -12,7 +12,7 @@ func TestBag(t *testing.T) {
 	bag.Add("rabbit")
 	bag.Add("panda")
 	bag.Add("tiger")
-	for bag.HasItem() {
+	for bag.HasNext() {
 		fmt.Printf("%s ", bag.Next())
 	}
 	fmt.Println("\nis bag empty?", bag.IsEmpty())
@@ -24,7 +24,7 @@ func TestBag(t *testing.T) {
 	ibag.Add(3)
 	ibag.Add(4)
 	ibag.Add(5)
-	for ibag.HasItem() {
+	for ibag.HasNext() {
 		fmt.Printf("%d ", ibag.Next())
 	}
 }

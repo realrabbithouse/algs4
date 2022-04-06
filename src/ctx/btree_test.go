@@ -28,10 +28,6 @@ func TestBTree(t *testing.T) {
 	fmt.Println("size:", btree.n)
 	fmt.Println("height:", btree.height)
 	fmt.Println(btree)
-	err := btree.Validate()
-	if err != nil {
-		fmt.Println(err)
-	}
 
 	fmt.Println("cs.princeton.edu:  ", btree.Get(rabbit.ComparableString("www.cs.princeton.edu")))
 	fmt.Println("simpsons.com:      ", btree.Get(rabbit.ComparableString("www.simpsons.com")))
