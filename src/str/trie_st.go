@@ -70,6 +70,7 @@ func (trie *TrieST) Put(key string, val interface{}) {
 	trie.root = put(trie, trie.root, key, val, 0)
 }
 
+// del 删除之后必须清除空的节点
 func del(trie *TrieST, x *charNode, key string, d int) *charNode {
 	// key doesn't exist at the first place
 	if x == nil {
