@@ -49,8 +49,8 @@ func (s IntSliceMergeSort) sortHelper(aux rabbit.IntSlice, low, high int) {
 }
 
 func (s IntSliceMergeSort) sort() {
-	aux := s.New(s.Len())
-	s.sortHelper(aux.(rabbit.IntSlice), 0, s.Len()-1)
+	aux := make(rabbit.IntSlice, s.Len())
+	s.sortHelper(aux, 0, s.Len()-1)
 }
 
 func MergeSortInt(slice []int) {

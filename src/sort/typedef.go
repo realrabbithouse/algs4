@@ -1,10 +1,9 @@
-package rabbit
+package sort
 
-// ComparableSlice is the interface that wraps the comparable slice objects for sorting.
 type ComparableSlice interface {
 	Swap(i, j int)
 	Compare(i, j int) bool
-	Len() int
+	Length() int
 	IsSorted() bool
 }
 
@@ -16,11 +15,11 @@ func (s IntSlice) Swap(i, j int) {
 func (s IntSlice) Compare(i, j int) bool {
 	return s[i] <= s[j]
 }
-func (s IntSlice) Len() int {
+func (s IntSlice) Length() int {
 	return len(s)
 }
 func (s IntSlice) IsSorted() bool {
-	var n = s.Len()
+	var n = s.Length()
 	for i := 0; i < n-1; i++ {
 		if !s.Compare(i, i+1) {
 			return false
@@ -31,6 +30,13 @@ func (s IntSlice) IsSorted() bool {
 func (s IntSlice) New(sz int) ComparableSlice {
 	return IntSlice(make([]int, sz))
 }
+func (s IntSlice) Copy() ComparableSlice {
+	cp := make([]int, s.Length())
+	for i := range s {
+		cp[i] = s[i]
+	}
+	return IntSlice(cp)
+}
 
 type StringSlice []string
 
@@ -40,11 +46,11 @@ func (s StringSlice) Swap(i, j int) {
 func (s StringSlice) Compare(i, j int) bool {
 	return s[i] <= s[j]
 }
-func (s StringSlice) Len() int {
+func (s StringSlice) Length() int {
 	return len(s)
 }
 func (s StringSlice) IsSorted() bool {
-	var n = s.Len()
+	var n = s.Length()
 	for i := 0; i < n-1; i++ {
 		if !s.Compare(i, i+1) {
 			return false
@@ -52,34 +58,22 @@ func (s StringSlice) IsSorted() bool {
 	}
 	return true
 }
+func (s StringSlice) New(sz int) ComparableSlice {
+	return StringSlice(make([]string, sz))
+}
+func (s StringSlice) Copy() ComparableSlice {
+	cp := make([]string, s.Length())
+	for i := range s {
+		cp[i] = s[i]
+	}
+	return StringSlice(cp)
+}
 
-// ******************************************************************************************* //
+// ********************************************************************* //
 
-// Comparable is the interface that wraps the compare method for comparable objects.
+// Comparable defines the interface for comparable objects.
 type Comparable interface {
 	CompareTo(Comparable) int
-}
-
-func Equal(left, right Comparable) bool {
-	return left.CompareTo(right) == 0
-}
-
-func Less(left, right Comparable) bool {
-	return left.CompareTo(right) < 0
-}
-
-func LessEqual(left, right Comparable) bool {
-	res := left.CompareTo(right)
-	return res <= 0
-}
-
-func Greater(left, right Comparable) bool {
-	return left.CompareTo(right) > 0
-}
-
-func GreaterEqual(left, right Comparable) bool {
-	res := left.CompareTo(right)
-	return res >= 0
 }
 
 type ComparableInt int

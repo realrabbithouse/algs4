@@ -1,5 +1,10 @@
 package basic
 
+type Iterator interface {
+	HasNext() bool
+	Next() interface{}
+}
+
 type linked struct {
 	item interface{}
 	next *linked
@@ -29,7 +34,7 @@ func (b Bag) Size() int {
 	return b.n
 }
 
-func (b *Bag) HasItem() bool {
+func (b *Bag) HasNext() bool {
 	if b.iter != nil {
 		return true
 	}
