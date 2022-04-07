@@ -102,11 +102,13 @@ func TestQuick(t *testing.T) {
 	//	log.Fatal(err)
 	//}
 
-	input := rabbit.IntSlice(prep.GenRandomNums(65536, 65536))
+	input := rabbit.IntSlice(prep.GenRandomNums(1000000, 65536))
 
 	QuickSortInt(input)
 	fmt.Println("is sorted?", input.IsSorted())
-	fmt.Println(input)
+	//for i := range input {
+	//	fmt.Println(input[i])
+	//}
 }
 
 func TestMaxPQ(t *testing.T) {

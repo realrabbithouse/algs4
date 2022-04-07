@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Insertion loop: i = [1 ~ n), j = [i, 1]
 type Insertion struct {
 	slice rabbit.ComparableSlice
 }

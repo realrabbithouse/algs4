@@ -6,6 +6,11 @@ import (
 	"time"
 )
 
+//
+// Key: sink & swim
+//
+
+// MaxPQ Maximum Priority Queue.
 type MaxPQ struct {
 	n  int
 	pq []rabbit.Comparable
@@ -37,6 +42,7 @@ func NewMaxPQWithKeys(keys []rabbit.Comparable) *MaxPQ {
 	return maxPQ
 }
 
+// Insert inserts to the last, and swim up.
 func (q *MaxPQ) Insert(v rabbit.Comparable) {
 	q.pq = append(q.pq, v)
 	q.n++

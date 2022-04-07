@@ -12,45 +12,47 @@ import (
 
 // IntSliceMergeSort 涉及到赋值，拷贝，无法仅使用三个通用接口实现
 type IntSliceMergeSort struct {
-	rabbit.IntSlice // FIXME: 不是一个好的实践
+	slice rabbit.IntSlice // FIXME: 不是一个好的实践
 }
 
 // merge the first (low to mid) and the second (mid + 1 to high) sorted part into one sorted array.
 func (s IntSliceMergeSort) merge(aux rabbit.IntSlice, low, mid, high int) {
 	for i := low; i <= high; i++ {
-		aux[i] = s.IntSlice[i]
+		aux[i] = s.slice[i]
 	}
-	i, j := low, mid+1
+	i, j := low, mid+1 // 采用双指针进行merge
 	for k := low; k <= high; k++ {
 		if i > mid {
-			s.IntSlice[k] = aux[j]
+			s.slice[k] = aux[j]
 			j++
 		} else if j > high {
-			s.IntSlice[k] = aux[i]
+			s.slice[k] = aux[i]
 			i++
 		} else if aux.Compare(i, j) {
-			s.IntSlice[k] = aux[i]
+			s.slice[k] = aux[i]
 			i++
 		} else {
-			s.IntSlice[k] = aux[j]
+			s.slice[k] = aux[j]
 			j++
 		}
 	}
 }
 
 func (s IntSliceMergeSort) sortHelper(aux rabbit.IntSlice, low, high int) {
+	// 退出条件
 	if high <= low {
 		return
 	}
 	mid := low + (high-low)/2
 	s.sortHelper(aux, low, mid)
 	s.sortHelper(aux, mid+1, high)
+	// sort first, merge second
 	s.merge(aux, low, mid, high)
 }
 
 func (s IntSliceMergeSort) sort() {
-	aux := make(rabbit.IntSlice, s.Len())
-	s.sortHelper(aux, 0, s.Len()-1)
+	aux := make(rabbit.IntSlice, s.slice.Len())
+	s.sortHelper(aux, 0, s.slice.Len()-1)
 }
 
 func MergeSortInt(slice []int) {
