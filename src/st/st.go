@@ -10,18 +10,18 @@ type (
 )
 
 type ST interface {
-	Contains(key Key) bool
+	Contains(k Key) bool
 	IsEmpty() bool
 	Size() int
-	Put(key Key, value Value)
-	Get(key Key) Value
-	Delete(key Key)
+	Put(k Key, v Value)
+	Get(k Key) Value
+	Delete(k Key)
 	Min() Key
 	Max() Key
-	Floor(key Key) Key   // 小于等于key的最大键
-	Ceiling(key Key) Key // 大于等于key的最小键
-	Rank(key Key) int    // 小于key的键的数量
-	Choose(k int) Key    // 排名为k的键，k = 0,1,2...
+	Floor(k Key) Key   // 小于等于key的最大键
+	Ceiling(k Key) Key // 大于等于key的最小键
+	Rank(k Key) int    // 小于key的键的数量
+	Choose(k int) Key  // 排名为k的键，k = 0,1,2...
 	DeleteMin()
 	DeleteMax()
 }

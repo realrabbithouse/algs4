@@ -42,8 +42,8 @@ func (b *Bag) HasNext() bool {
 	return false
 }
 
-func (b *Bag) Next() (ret interface{}) {
-	ret = b.iter.item
+func (b *Bag) Next() interface{} {
+	ret := b.iter.item
 	b.iter = b.iter.next
-	return
+	return ret
 }

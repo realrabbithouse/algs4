@@ -32,4 +32,10 @@ func TestBST(t *testing.T) {
 	fmt.Println("rank of danger:", bst.Rank(rabbit.ComparableString("danger")))
 	fmt.Println("choose 3:", bst.Choose(3))
 	fmt.Println("kick:", bst.Get(rabbit.ComparableString("kick")))
+	fmt.Println("======= pre order =======")
+	bst.PreOrder()
+	fmt.Println("======= in order =======")
+	bst.InOrder()
+	fmt.Println("======= post order =======")
+	bst.PostOrder()
 }
