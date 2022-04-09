@@ -52,7 +52,7 @@ func main() {
 	if err != nil {
 		log.Println("put err:", err)
 	}
-	err = cli.Put("rabbit", "zzz")
+	err = cli.Put("typ", "zzz")
 	if err != nil {
 		log.Println("put err:", err)
 	}
@@ -73,7 +73,7 @@ func main() {
 	if err != nil {
 		log.Println("get err:", err)
 	}
-	_, err = cli.Get("rabbit")
+	_, err = cli.Get("typ")
 	if err != nil {
 		log.Println("get err:", err)
 	}

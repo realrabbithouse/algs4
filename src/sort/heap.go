@@ -1,14 +1,14 @@
 package sort
 
 import (
-	"algs4/src/rabbit"
+	"algs4/src/typ"
 	"fmt"
 	"time"
 )
 
 // Heap as a maximum priority queue.
 type Heap struct {
-	pq []rabbit.Comparable // Treat index i as index i-1.
+	pq []typ.Comparable // Treat index i as index i-1.
 }
 
 func (h *Heap) swap(i, j int) {

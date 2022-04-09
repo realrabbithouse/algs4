@@ -1,7 +1,7 @@
 package ctx
 
 import (
-	"algs4/src/rabbit"
+	"algs4/src/typ"
 	"errors"
 	"fmt"
 	"strings"
@@ -19,12 +19,12 @@ const (
 )
 
 type entry struct {
-	key  rabbit.Comparable
+	key  typ.Comparable
 	val  interface{}
 	next *node
 }
 
-func newEntry(key rabbit.Comparable, val interface{}) entry {
+func newEntry(key typ.Comparable, val interface{}) entry {
 	return entry{
 		key: key,
 		val: val,
@@ -69,16 +69,16 @@ func (t BTree) Height() uint32 {
 	return t.height
 }
 
-func search(node *node, key rabbit.Comparable, h uint32) (val interface{}) {
+func search(node *node, key typ.Comparable, h uint32) (val interface{}) {
 	if h == 0 {
 		for i := uint32(0); i < node.x; i++ {
-			if rabbit.Equal(key, node.children[i].key) {
+			if typ.Equal(key, node.children[i].key) {
 				return node.children[i].val
 			}
 		}
 	} else {
 		for i := uint32(0); i < node.x; i++ {
-			if i+1 == node.x || rabbit.Less(key, node.children[i+1].key) {
+			if i+1 == node.x || typ.Less(key, node.children[i+1].key) {
 				return search(node.children[i].next, key, h-1)
 			}
 		}
@@ -89,7 +89,7 @@ func search(node *node, key rabbit.Comparable, h uint32) (val interface{}) {
 
 // Get returns the value associated with the given key, and returns nil if the
 // key is not in the symbol table.
-func (t BTree) Get(key rabbit.Comparable) (val interface{}) {
+func (t BTree) Get(key typ.Comparable) (val interface{}) {
 	if key == nil {
 		fmt.Println("error: nil key")
 		return nil
@@ -97,7 +97,7 @@ func (t BTree) Get(key rabbit.Comparable) (val interface{}) {
 	return search(t.root, key, t.height)
 }
 
-func insert(node *node, key rabbit.Comparable, val interface{}, h uint32) (r *node, code state) {
+func insert(node *node, key typ.Comparable, val interface{}, h uint32) (r *node, code state) {
 	var (
 		j   uint32               // which position to insert?
 		ent = newEntry(key, val) // will bring cascading insert?
@@ -106,7 +106,7 @@ func insert(node *node, key rabbit.Comparable, val interface{}, h uint32) (r *no
 	if h == 0 {
 		// external node
 		for j = uint32(0); j < node.x; j++ {
-			if rabbit.Equal(key, node.children[j].key) {
+			if typ.Equal(key, node.children[j].key) {
 				if val == nil {
 					// delete
 					if node.x == 1 {
@@ -123,7 +123,7 @@ func insert(node *node, key rabbit.Comparable, val interface{}, h uint32) (r *no
 				node.children[j].val = val
 				return nil, _replace
 			}
-			if rabbit.Less(key, node.children[j].key) {
+			if typ.Less(key, node.children[j].key) {
 				// insert, later
 				break
 			}
@@ -131,7 +131,7 @@ func insert(node *node, key rabbit.Comparable, val interface{}, h uint32) (r *no
 	} else {
 		// internal node
 		for j = 0; j < node.x; j++ {
-			if j+1 == node.x || rabbit.Less(key, node.children[j+1].key) {
+			if j+1 == node.x || typ.Less(key, node.children[j+1].key) {
 				r, code = insert(node.children[j].next, key, val, h-1)
 				j++
 				if r == nil {
@@ -180,7 +180,7 @@ func split(a *node) *node {
 // Put inserts the key-value pair into the symbol table, overwriting the old value
 // with the new value if the key is already in the symbol table.
 // If the put value is nil, this effectively deletes the key from the symbol table.
-func (t *BTree) Put(key rabbit.Comparable, val interface{}) {
+func (t *BTree) Put(key typ.Comparable, val interface{}) {
 	if key == nil {
 		fmt.Println("error: nil key")
 		return
@@ -217,25 +217,25 @@ func (t *BTree) Put(key rabbit.Comparable, val interface{}) {
 }
 
 // validate buggy! 因为最左侧节点并不一定满足这个约束
-func validate(node *node, lo rabbit.Comparable) (err error) {
+func validate(node *node, lo typ.Comparable) (err error) {
 	if node.isExternal {
 		for i := uint32(0); i < node.x; i++ {
-			if i == 0 && !rabbit.Equal(lo, node.children[i].key) {
+			if i == 0 && !typ.Equal(lo, node.children[i].key) {
 				err = errors.New(fmt.Sprintf("internal: first entry unequal: %v", lo))
 				return
 			}
-			if i > 0 && !rabbit.Less(lo, node.children[i].key) {
+			if i > 0 && !typ.Less(lo, node.children[i].key) {
 				err = errors.New(fmt.Sprintf("internal: relation discrepancy: %v", lo))
 				return
 			}
 		}
 	} else {
 		for i := uint32(0); i < node.x; i++ {
-			if i == 0 && !rabbit.Equal(lo, node.children[i].key) {
+			if i == 0 && !typ.Equal(lo, node.children[i].key) {
 				err = errors.New(fmt.Sprintf("external: first entry unequal: %v", lo))
 				return
 			}
-			if i > 0 && !rabbit.Less(lo, node.children[i].key) {
+			if i > 0 && !typ.Less(lo, node.children[i].key) {
 				err = errors.New(fmt.Sprintf("external: relation discrepancy: %v", lo))
 				return
 			}

@@ -1,4 +1,4 @@
-package prep
+package pre
 
 import (
 	"bufio"
@@ -36,6 +36,7 @@ func GenRandomNums(max, count int) (ret []int) {
 
 func ReadNumsFromFile(path string) (ret []int, err error) {
 	f, err := os.Open(path)
+	defer f.Close()
 	if err != nil {
 		return nil, fmt.Errorf("open file err: %q", err)
 	}

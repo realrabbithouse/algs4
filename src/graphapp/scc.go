@@ -6,11 +6,14 @@ import (
 	"fmt"
 )
 
+// SCC is the interface that wraps the basic methods for strongly connected components.
 type SCC interface {
 	StronglyConnected(v, w graph.ID) bool
 	Count() int
 	Id(v graph.ID) int
 }
+
+// **************************************************************** //
 
 // KosarajuSharirSCC algorithm: run DFS on G, using reverse postorder to guide calculation.
 type KosarajuSharirSCC struct {

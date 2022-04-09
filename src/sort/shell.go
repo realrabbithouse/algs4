@@ -1,14 +1,14 @@
 package sort
 
 import (
-	"algs4/src/rabbit"
+	"algs4/src/typ"
 	"fmt"
 	"time"
 )
 
 // Shell is an optimized version of insertion sort.
 type Shell struct {
-	slice rabbit.ComparableSlice
+	slice typ.ComparableSlice
 }
 
 func (s Shell) sort() {
@@ -32,7 +32,7 @@ func (s Shell) hGapSort(h int) {
 	//fmt.Printf("after gap %d sort: %v\n", h, s.slice)
 }
 
-func ShellSort(slice rabbit.ComparableSlice) {
+func ShellSort(slice typ.ComparableSlice) {
 	ts := time.Now()
 	shell := Shell{slice: slice}
 	shell.sort()

@@ -1,4 +1,4 @@
-package rabbit
+package typ
 
 // ComparableSlice is the interface that wraps the comparable slice objects for sorting.
 type ComparableSlice interface {

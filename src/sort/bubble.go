@@ -1,13 +1,13 @@
 package sort
 
 import (
-	"algs4/src/rabbit"
+	"algs4/src/typ"
 	"fmt"
 	"time"
 )
 
 type Bubble struct {
-	slice rabbit.ComparableSlice
+	slice typ.ComparableSlice
 }
 
 func (s Bubble) sort() {
@@ -21,7 +21,7 @@ func (s Bubble) sort() {
 	}
 }
 
-func BubbleSort(slice rabbit.ComparableSlice) {
+func BubbleSort(slice typ.ComparableSlice) {
 	ts := time.Now()
 	bubble := Bubble{slice: slice}
 	bubble.sort()

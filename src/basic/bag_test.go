@@ -9,7 +9,7 @@ func TestBag(t *testing.T) {
 	bag := Bag{first: nil, n: 0}
 	bag.Add("hello")
 	bag.Add("world")
-	bag.Add("rabbit")
+	bag.Add("typ")
 	bag.Add("panda")
 	bag.Add("tiger")
 	for bag.HasNext() {

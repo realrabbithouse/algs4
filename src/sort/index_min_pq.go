@@ -1,7 +1,7 @@
 package sort
 
 import (
-	"algs4/src/rabbit"
+	"algs4/src/typ"
 	"errors"
 	"fmt"
 )
@@ -10,9 +10,9 @@ import (
 type IndexMinPQ struct {
 	maxN int
 	n    int
-	keys []rabbit.Comparable // 输入的原始数组
-	pq   []int               // sorted index in priority queue (sorted index -> original index)
-	qp   []int               // original index -> sorted index
+	keys []typ.Comparable // 输入的原始数组
+	pq   []int            // sorted index in priority queue (sorted index -> original index)
+	qp   []int            // original index -> sorted index
 }
 
 func NewIndexMinPQWithCap(initCap int) *IndexMinPQ {
@@ -23,13 +23,13 @@ func NewIndexMinPQWithCap(initCap int) *IndexMinPQ {
 	return &IndexMinPQ{
 		maxN: initCap,
 		n:    0,
-		keys: make([]rabbit.Comparable, initCap+1),
+		keys: make([]typ.Comparable, initCap+1),
 		pq:   pq,
 		qp:   qp,
 	}
 }
 
-func NewIndexMinPQWithKeys(keys []rabbit.Comparable) *IndexMinPQ {
+func NewIndexMinPQWithKeys(keys []typ.Comparable) *IndexMinPQ {
 	minPQ := NewIndexMinPQWithCap(len(keys))
 	for i, key := range keys {
 		minPQ.Insert(i, key)
@@ -57,7 +57,7 @@ func (minPQ IndexMinPQ) Contains(i int) bool {
 	return minPQ.qp[i] != -1
 }
 
-func (minPQ *IndexMinPQ) Insert(i int, key rabbit.Comparable) {
+func (minPQ *IndexMinPQ) Insert(i int, key typ.Comparable) {
 	err := minPQ.validateIndex(i)
 	if err != nil {
 		fmt.Println("Insert error:", err)
@@ -74,7 +74,7 @@ func (minPQ *IndexMinPQ) Insert(i int, key rabbit.Comparable) {
 	minPQ.swim(minPQ.n)
 }
 
-func (minPQ *IndexMinPQ) Change(i int, key rabbit.Comparable) {
+func (minPQ *IndexMinPQ) Change(i int, key typ.Comparable) {
 	err := minPQ.validateIndex(i)
 	if err != nil {
 		fmt.Println("Change error:", err)
@@ -135,7 +135,7 @@ func (minPQ IndexMinPQ) MinIndex() int {
 	return minPQ.pq[1]
 }
 
-func (minPQ IndexMinPQ) MinKey() rabbit.Comparable {
+func (minPQ IndexMinPQ) MinKey() typ.Comparable {
 	if minPQ.n == 0 {
 		fmt.Println("MinKey error: priority queue underflow")
 		return nil
@@ -143,7 +143,7 @@ func (minPQ IndexMinPQ) MinKey() rabbit.Comparable {
 	return minPQ.keys[minPQ.pq[1]]
 }
 
-func (minPQ *IndexMinPQ) DelMin() rabbit.Comparable {
+func (minPQ *IndexMinPQ) DelMin() typ.Comparable {
 	if minPQ.n == 0 {
 		fmt.Println("DelMin error: priority queue underflow")
 		return nil
@@ -160,7 +160,7 @@ func (minPQ *IndexMinPQ) DelMin() rabbit.Comparable {
 	return minKey
 }
 
-func (minPQ IndexMinPQ) KeyOf(i int) rabbit.Comparable {
+func (minPQ IndexMinPQ) KeyOf(i int) typ.Comparable {
 	err := minPQ.validateIndex(i)
 	if err != nil {
 		fmt.Println("KeyOf error:", err)

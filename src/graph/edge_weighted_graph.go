@@ -1,7 +1,7 @@
 package graph
 
 import (
-	"algs4/src/rabbit"
+	"algs4/src/typ"
 	"bufio"
 	"errors"
 	"fmt"
@@ -35,7 +35,7 @@ func (e *Edge) Other(vertex ID) (ID, error) {
 	}
 }
 
-func (e *Edge) CompareTo(obj rabbit.Comparable) int {
+func (e *Edge) CompareTo(obj typ.Comparable) int {
 	other := obj.(*Edge)
 	if e.weight < other.weight {
 		return -1

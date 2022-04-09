@@ -1,11 +1,11 @@
 package st
 
 import (
-	"algs4/src/rabbit"
+	"algs4/src/typ"
 )
 
 type (
-	Key   rabbit.Comparable
+	Key   typ.Comparable
 	Value interface{}
 )
 
