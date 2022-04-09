@@ -1,5 +1,10 @@
 package basic
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Iterator interface {
 	HasNext() bool
 	Next() interface{}
@@ -46,4 +51,14 @@ func (b *Bag) Next() interface{} {
 	ret := b.iter.item
 	b.iter = b.iter.next
 	return ret
+}
+
+func (b Bag) String() string {
+	var builder strings.Builder
+	builder.WriteString("bag: [ ")
+	for b.HasNext() {
+		builder.WriteString(fmt.Sprintf("%v ", b.Next()))
+	}
+	builder.WriteString("]")
+	return builder.String()
 }

@@ -13,23 +13,7 @@ type DirectedDFS struct {
 	count   int
 }
 
-func NewDirectedDFS(digraph *graph.Digraph, source int) (*DirectedDFS, error) {
-	if digraph == nil {
-		return nil, errors.New("argument is nil")
-	}
-	d := DirectedDFS{
-		digraph: digraph,
-		marked:  make([]bool, digraph.V),
-	}
-	err := d.validateVertex(source)
-	if err != nil {
-		return nil, err
-	}
-	d.dfs(source)
-	return &d, nil
-}
-
-func NewMultiDirectedDFS(digraph *graph.Digraph, sources []int) (*DirectedDFS, error) {
+func NewDirectedDFS(digraph *graph.Digraph, sources ...int) (*DirectedDFS, error) {
 	if digraph == nil {
 		return nil, errors.New("argument is nil")
 	}
@@ -59,6 +43,7 @@ func (d *DirectedDFS) dfs(v int) {
 
 func (d *DirectedDFS) Marked(v int) bool {
 	if err := d.validateVertex(v); err != nil {
+		fmt.Println("Marked err:", err)
 		return false
 	}
 	return d.marked[v]

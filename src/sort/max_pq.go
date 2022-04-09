@@ -65,6 +65,7 @@ func (q *MaxPQ) DelMax() rabbit.Comparable {
 	q.pq[q.n] = nil
 	q.n--
 	q.sink(1)
+	// 缩容
 	if q.n > 0 && q.n == (cap(q.pq)-1)/4 {
 		q.pq = q.pq[:(cap(q.pq)-1)/2]
 	}
@@ -147,6 +148,5 @@ func (q *MaxPQ) TopK(k int) []rabbit.Comparable {
 	for i := 0; i < k; i++ {
 		topK = append(topK, q.DelMax())
 	}
-
 	return topK
 }

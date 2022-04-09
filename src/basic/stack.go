@@ -1,5 +1,10 @@
 package basic
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Stack struct {
 	head *linked
 	iter *linked
@@ -51,4 +56,14 @@ func (stack *Stack) Next() interface{} {
 	val := stack.iter.item
 	stack.iter = stack.iter.next
 	return val
+}
+
+func (stack Stack) String() string {
+	var builder strings.Builder
+	builder.WriteString("stack: [ ")
+	for stack.HasNext() {
+		builder.WriteString(fmt.Sprintf("%v ", stack.Next()))
+	}
+	builder.WriteString("]")
+	return builder.String()
 }

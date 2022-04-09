@@ -176,6 +176,7 @@ func (wg *EdgeWeightedGraph) Degree(id int) int {
 	err := wg.validateVertex(id)
 	if err != nil {
 		fmt.Println("Degree:", err)
+		return 0
 	}
 	return len(wg.adj[id])
 }

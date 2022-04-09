@@ -1,5 +1,10 @@
 package basic
 
+import (
+	"fmt"
+	"strings"
+)
+
 type Queue struct {
 	first, last *linked
 	iter        *linked
@@ -47,11 +52,25 @@ func (q *Queue) Dequeue() interface{} {
 }
 
 func (q *Queue) HasNext() bool {
-	return q.iter != nil
+	if q.iter != nil {
+		return true
+	}
+	q.iter = q.first
+	return false
 }
 
 func (q *Queue) Next() interface{} {
 	val := q.iter.item
 	q.iter = q.iter.next
 	return val
+}
+
+func (q Queue) String() string {
+	var builder strings.Builder
+	builder.WriteString("queue: [ ")
+	for q.HasNext() {
+		builder.WriteString(fmt.Sprintf("%v ", q.Next()))
+	}
+	builder.WriteString("]")
+	return builder.String()
 }

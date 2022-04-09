@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// IndexMinPQ Indexed Minimum Priority Queue.
 type IndexMinPQ struct {
 	maxN int
 	n    int
