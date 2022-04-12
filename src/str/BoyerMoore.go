@@ -4,7 +4,7 @@ package str
 // * Scan characters in pattern from right to left.
 // * Can skip as many as M text chars when finding one not in the pattern.
 type BoyerMoore struct {
-	right []int
+	right []int // i.e. for pattern "abcba", right[a]=4, right[b]=3, right[c]=2.
 	pat   string
 }
 
@@ -29,7 +29,7 @@ func (bm *BoyerMoore) Search(txt string) int {
 	N := len(txt)
 	M := len(bm.pat)
 	var skip int
-	for i := 0; i < N-M; i++ {
+	for i := 0; i <= N-M; i += skip {
 		skip = 0
 		for j := M - 1; j >= 0; j-- {
 			if bm.pat[j] != txt[i+j] {

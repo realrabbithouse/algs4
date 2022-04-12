@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestLSDSort(t *testing.T) {
+func TestLSD(t *testing.T) {
 	a := []string{
 		"AVFA",
 		"AVDX",
@@ -17,6 +17,6 @@ func TestLSDSort(t *testing.T) {
 		"DFJS",
 		"DFSC",
 	}
-	LSDSort(a, 4)
+	LSD(a, 4)
 	fmt.Println(a)
 }

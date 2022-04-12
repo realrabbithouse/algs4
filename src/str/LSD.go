@@ -8,9 +8,10 @@ package str
 // 4. 写回。
 //
 
-// LSDSort Least-Significant-Digit string sort.
+// LSD examines the characters in the keys in a right-to-left order.
+// LSD Least-Significant-Digit string sort.
 // Every string has at least W digits.
-func LSDSort(a []string, W int) {
+func LSD(a []string, W int) {
 	var (
 		N   = len(a)
 		R   = 256

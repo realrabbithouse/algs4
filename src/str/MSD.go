@@ -1,6 +1,8 @@
 package str
 
-// MSD  Most-Significant-Digit string sort.
+// MSD examines the characters in the keys in a left-to-right order,
+// working with the most significant character first.
+// MSD Most-Significant-Digit string sort.
 type MSD struct {
 	r      int // 基数，256
 	cutoff int // 小数组切换阈值，小数组采用插入排序

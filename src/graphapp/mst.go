@@ -12,3 +12,8 @@ type MST interface {
 }
 
 // **************************************************************** //
+
+type LazyPrimeMST struct {
+	marked []bool
+	mst    *basic.Queue
+}

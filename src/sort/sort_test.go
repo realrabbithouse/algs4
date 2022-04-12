@@ -170,3 +170,22 @@ func TestHeap(t *testing.T) {
 	h.Sort()
 	h.Show()
 }
+
+func TestMinPQ(t *testing.T) {
+	input := typ.IntSlice(pre.GenRandomNums(100, 50))
+	//fmt.Println("input:", input)
+	keys := make([]typ.Comparable, len(input))
+	for i := range input {
+		keys[i] = typ.ComparableInt(input[i])
+	}
+	minPQ := NewMinPQWithKeys(keys)
+
+	//for !minPQ.IsEmpty() {
+	//	fmt.Println(minPQ.DelMin())
+	//}
+
+	fmt.Println("check result:", minPQ.isMinHeap())
+	fmt.Println("min:", minPQ.Min())
+	fmt.Println("min 49:", minPQ.MinK(49))
+	fmt.Println("check result after deleting 20:", minPQ.isMinHeap())
+}
