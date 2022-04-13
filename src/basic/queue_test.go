@@ -6,7 +6,7 @@ import (
 )
 
 func TestQueue(t *testing.T) {
-	queue := NewQueue()
+	queue := new(Queue)
 	queue.Enqueue(1)
 	queue.Enqueue(2)
 	queue.Enqueue(3)

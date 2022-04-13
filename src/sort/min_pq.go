@@ -40,8 +40,12 @@ func (minPQ MinPQ) Size() int {
 }
 
 func (minPQ *MinPQ) Insert(k typ.Comparable) {
-	minPQ.pq = append(minPQ.pq, k)
 	minPQ.n++
+	if minPQ.n == len(minPQ.pq) {
+		minPQ.pq = append(minPQ.pq, k) // 增长切片长度
+	} else {
+		minPQ.pq[minPQ.n] = k
+	}
 	minPQ.swim(minPQ.n)
 }
 

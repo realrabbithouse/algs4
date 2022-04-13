@@ -35,8 +35,8 @@ func (e *Edge) Other(vertex ID) (ID, error) {
 	}
 }
 
-func (e *Edge) CompareTo(obj typ.Comparable) int {
-	other := obj.(*Edge)
+func (e Edge) CompareTo(obj typ.Comparable) int {
+	other := obj.(Edge)
 	if e.weight < other.weight {
 		return -1
 	} else if e.weight > other.weight {

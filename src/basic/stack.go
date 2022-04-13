@@ -11,10 +11,6 @@ type Stack struct {
 	n    int
 }
 
-func NewStack() *Stack {
-	return new(Stack)
-}
-
 func (stack *Stack) Push(val interface{}) {
 	newHead := &linked{
 		item: val,

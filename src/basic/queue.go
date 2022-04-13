@@ -11,10 +11,6 @@ type Queue struct {
 	n           int
 }
 
-func NewQueue() *Queue {
-	return new(Queue)
-}
-
 func (q *Queue) IsEmpty() bool {
 	return q.first == nil
 }
