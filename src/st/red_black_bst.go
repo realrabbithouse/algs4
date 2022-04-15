@@ -5,16 +5,16 @@ const (
 	BLACK = false
 )
 
-// ColorNode in Red/Black binary search tree.
-type ColorNode struct {
+// colorNode in Red/Black binary search tree.
+type colorNode struct {
 	key   Key
 	value Value
-	left  *ColorNode
-	right *ColorNode
-	sz    int
+	left  *colorNode
+	right *colorNode
+	size  int
 	color bool
 }
 
 type RedBlackBST struct {
-	root *ColorNode
+	root *colorNode
 }

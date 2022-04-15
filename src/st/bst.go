@@ -4,7 +4,7 @@ import "fmt"
 
 type Node struct {
 	key   Key
-	val   Value
+	value Value
 	left  *Node
 	right *Node
 	size  int
@@ -53,9 +53,9 @@ func (bst BST) Size() int {
 func put(node *Node, k Key, v Value) *Node {
 	if node == nil {
 		return &Node{
-			key:  k,
-			val:  v,
-			size: 1,
+			key:   k,
+			value: v,
+			size:  1,
 		}
 	}
 	cmp := k.CompareTo(node.key)
@@ -64,7 +64,7 @@ func put(node *Node, k Key, v Value) *Node {
 	} else if cmp > 0 {
 		node.right = put(node.right, k, v)
 	} else {
-		node.val = v
+		node.value = v
 	}
 	node.size = size(node.left) + size(node.right) + 1
 	return node
@@ -84,7 +84,7 @@ func get(node *Node, k Key) Value {
 	} else if cmp > 0 {
 		return get(node.right, k)
 	} else {
-		return node.val
+		return node.value
 	}
 }
 
@@ -146,15 +146,15 @@ func (bst BST) Max() Key {
 	return max(bst.root).key
 }
 
-func del(node *Node, key Key) *Node {
+func delelteKey(node *Node, key Key) *Node {
 	if node == nil {
 		return nil
 	}
 	cmp := key.CompareTo(node.key)
 	if cmp < 0 {
-		node.left = del(node.left, key)
+		node.left = delelteKey(node.left, key)
 	} else if cmp > 0 {
-		node.right = del(node.right, key)
+		node.right = delelteKey(node.right, key)
 	} else {
 		if node.left == nil {
 			return node.right
@@ -163,6 +163,7 @@ func del(node *Node, key Key) *Node {
 			return node.left
 		}
 		var tmp *Node = node
+		// Replace the current node with the minimum node of right side.
 		node = min(tmp.right)
 		node.right = deleteMin(tmp.right)
 		node.left = tmp.left
@@ -172,7 +173,7 @@ func del(node *Node, key Key) *Node {
 }
 
 func (bst *BST) Delete(key Key) {
-	bst.root = del(bst.root, key)
+	bst.root = delelteKey(bst.root, key)
 }
 
 // floor returns the maximum node less than the given key.
@@ -282,8 +283,7 @@ func (bst BST) Rank(key Key) int {
 	return rank(bst.root, key)
 }
 
-// Get all keys in the symbol table in given range. //
-
+// Get all keys in the symbol table in given range.
 func keys(node *Node, lo, hi Key, sli *[]Key) {
 	if node == nil {
 		return
@@ -312,7 +312,7 @@ func preOrder(node *Node) {
 	if node == nil {
 		return
 	}
-	fmt.Println(node.key, node.val)
+	fmt.Println(node.key, node.value)
 	preOrder(node.left)
 	preOrder(node.right)
 }
@@ -327,7 +327,7 @@ func inOrder(node *Node) {
 		return
 	}
 	inOrder(node.left)
-	fmt.Println(node.key, node.val)
+	fmt.Println(node.key, node.value)
 	inOrder(node.right)
 }
 
@@ -342,7 +342,7 @@ func postOrder(node *Node) {
 	}
 	postOrder(node.left)
 	postOrder(node.right)
-	fmt.Println(node.key, node.val)
+	fmt.Println(node.key, node.value)
 }
 
 func (bst BST) PostOrder() {
