@@ -2,17 +2,19 @@ package graphapp
 
 import (
 	"algs4/src/basic"
+	"algs4/src/ctx"
 	"algs4/src/graph"
 	"algs4/src/sort"
 	"errors"
 	"fmt"
+	ofsort "sort"
 )
 
 // MST defines a minimum spanning tree that wraps the basic minimum
 // spanning tree functionalities.
 type MST interface {
 	Weight() float64
-	Edges() *basic.Queue
+	Edges() []graph.Edge
 }
 
 // **************************************************************** //
@@ -91,4 +93,56 @@ func (p *LazyPrimMST) validateIndex(v int) error {
 		return errors.New(fmt.Sprintf("vertex %d is not between 0 and %d", v, V))
 	}
 	return nil
+}
+
+// The KruskalMST represents a data type for computing a minimum spanning tree in an edge-weighted graph.
+// The edge weights can be positive, zero, or negative and need not be distinct. If the graph is not
+// connected, it computes a minimum spanning forest, which is the union of minimum spanning trees in
+// each connected component.
+type KruskalMST struct {
+	mst    *basic.Queue
+	weight float64
+}
+
+func NewKruskalMST(G *graph.EdgeWeightedGraph) (*KruskalMST, error) {
+	if G == nil {
+		return nil, errors.New("argument is nil")
+	}
+	uf, err := ctx.NewUnionFind(G.V)
+	if err != nil {
+		return nil, err
+	}
+	kruskal := KruskalMST{
+		mst: new(basic.Queue),
+	}
+	edges := make([]graph.Edge, G.E)
+	copy(edges, G.Edges())
+	ofsort.Slice(edges, func(i, j int) bool {
+		return edges[i].CompareTo(edges[j]) < 0
+	})
+	for i := range edges {
+		edge := edges[i]
+		v := edge.Either()
+		w, _ := edge.Other(v)
+		if !uf.Connected(int(v), int(w)) {
+			kruskal.mst.Enqueue(edge)
+			kruskal.weight += edge.Weight()
+			uf.Union(int(v), int(w))
+		}
+	}
+	return &kruskal, nil
+}
+
+func (k *KruskalMST) Edges() []graph.Edge {
+	N := k.mst.Size()
+	var iter basic.Iterator = k.mst
+	edges := make([]graph.Edge, 0, N)
+	for iter.HasNext() {
+		edges = append(edges, iter.Next().(graph.Edge))
+	}
+	return edges
+}
+
+func (k *KruskalMST) Weight() float64 {
+	return k.weight
 }

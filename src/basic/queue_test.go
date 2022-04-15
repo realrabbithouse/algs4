@@ -15,8 +15,9 @@ func TestQueue(t *testing.T) {
 
 	var iter Iterator = queue
 	for iter.HasNext() {
-		fmt.Println(iter.Next())
+		fmt.Print(iter.Next(), " ")
 	}
+	fmt.Println()
 
 	fmt.Println("size:", queue.Size())
 	fmt.Println("is empty:", queue.IsEmpty())

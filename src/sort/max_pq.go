@@ -44,8 +44,12 @@ func NewMaxPQWithKeys(keys []typ.Comparable) *MaxPQ {
 
 // Insert inserts to the last, and swim up.
 func (q *MaxPQ) Insert(v typ.Comparable) {
-	q.pq = append(q.pq, v)
 	q.n++
+	if q.n == len(q.pq) {
+		q.pq = append(q.pq, v)
+	} else {
+		q.pq[q.n] = v
+	}
 	q.swim(q.n)
 }
 

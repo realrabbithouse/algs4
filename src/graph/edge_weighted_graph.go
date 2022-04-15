@@ -184,8 +184,18 @@ func (wg *EdgeWeightedGraph) Degree(id int) int {
 func (wg *EdgeWeightedGraph) Edges() []Edge {
 	edges := make([]Edge, 0, wg.E)
 	for i := range wg.adj {
+		var selfLoops int
 		for j := range wg.adj[i] {
-			edges = append(edges, wg.adj[i][j])
+			other, _ := wg.adj[i][j].Other(ID(i))
+			if other > ID(i) {
+				edges = append(edges, wg.adj[i][j])
+			} else if other == ID(i) {
+				// add only one copy of each self loop (self loops will be consecutive)
+				if selfLoops%2 == 0 {
+					edges = append(edges, wg.adj[i][j])
+				}
+				selfLoops++
+			}
 		}
 	}
 	return edges
