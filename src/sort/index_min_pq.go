@@ -48,6 +48,10 @@ func (minPQ IndexMinPQ) Size() int {
 	return minPQ.n
 }
 
+func (minPQ IndexMinPQ) IsEmpty() bool {
+	return minPQ.n == 0
+}
+
 func (minPQ IndexMinPQ) Contains(i int) bool {
 	err := minPQ.validateIndex(i)
 	if err != nil {
@@ -143,21 +147,22 @@ func (minPQ IndexMinPQ) MinKey() typ.Comparable {
 	return minPQ.keys[minPQ.pq[1]]
 }
 
-func (minPQ *IndexMinPQ) DelMin() typ.Comparable {
+// DelMin deletes the minimum key and returns the corresponding index.
+func (minPQ *IndexMinPQ) DelMin() int {
 	if minPQ.n == 0 {
 		fmt.Println("DelMin error: priority queue underflow")
-		return nil
+		return -1
 	}
 	min := minPQ.pq[1]
-	minKey := minPQ.keys[min]
-	fmt.Printf("delete min: min index: %d, min value: %d\n", min, minKey)
+	//minKey := minPQ.keys[min]
+	//fmt.Printf("delete min: min index: %d, min value: %d\n", min, minKey)
 	minPQ.swap(1, minPQ.n)
 	minPQ.n--
 	minPQ.sink(1)
 	minPQ.qp[min] = -1
 	minPQ.keys[min] = nil
 	minPQ.pq[minPQ.n+1] = -1
-	return minKey
+	return min
 }
 
 func (minPQ IndexMinPQ) KeyOf(i int) typ.Comparable {
