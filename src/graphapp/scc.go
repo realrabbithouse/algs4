@@ -10,7 +10,7 @@ import (
 type SCC interface {
 	StronglyConnected(v, w graph.ID) bool
 	Count() int
-	Id(v graph.ID) int
+	Which(v graph.ID) int
 }
 
 // **************************************************************** //
@@ -59,7 +59,7 @@ func (scc KosarajuSharirSCC) Count() int {
 	return scc.count
 }
 
-func (scc KosarajuSharirSCC) Id(v graph.ID) int {
+func (scc KosarajuSharirSCC) Which(v graph.ID) int {
 	err := scc.validateVertex(int(v))
 	if err != nil {
 		fmt.Println("Id err:", err)

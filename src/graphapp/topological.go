@@ -6,6 +6,26 @@ import (
 	"fmt"
 )
 
+//
+// Kahn’s algorithm
+//
+// L <- Empty list that will contain the sorted elements
+// S <- Set of all nodes with no incoming edge
+//
+// while S is not empty do
+//    remove a node N from S
+//    add N to L
+//    for each node M with an edge E from N to M do
+//        remove edge E from the graph
+//        if M has no other incoming edges then
+//            insert M into S
+//
+// if graph has edges then
+//    return error  # graph has at least one cycle
+// else
+//    return L  # a topologically sorted order
+//
+
 // Topological 拓扑排序
 type Topological struct {
 	order []graph.ID

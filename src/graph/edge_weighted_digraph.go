@@ -28,7 +28,7 @@ func (e *DirectedEdge) Weight() float64 {
 }
 
 func (e DirectedEdge) String() string {
-	return fmt.Sprintf("%d->%d %.2f", e.from, e.to, e.weight)
+	return fmt.Sprintf("%d->%d %.8f", e.from, e.to, e.weight)
 }
 
 type EdgeWeightedDigraph struct {
