@@ -13,6 +13,11 @@ func TestQueue(t *testing.T) {
 	queue.Enqueue(4)
 	queue.Enqueue(5)
 
+	for queue.HasNext() {
+		fmt.Print(queue.Next(), " ")
+	}
+	fmt.Println()
+
 	var iter Iterator = queue
 	for iter.HasNext() {
 		fmt.Print(iter.Next(), " ")
