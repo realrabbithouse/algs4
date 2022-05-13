@@ -6,17 +6,20 @@ import (
 )
 
 func TestBag(t *testing.T) {
+	var it Iterator
 	bag := Bag{first: nil, n: 0}
 	bag.Add("hello")
 	bag.Add("world")
 	bag.Add("typ")
 	bag.Add("panda")
 	bag.Add("tiger")
-	for bag.HasNext() {
-		fmt.Printf("%s ", bag.Next())
-	}
-	fmt.Println("\nis bag empty?", bag.IsEmpty())
+	fmt.Println("is bag empty?", bag.IsEmpty())
 	fmt.Println("bag size:", bag.Size())
+	it = &bag
+	for it.HasNext() {
+		fmt.Printf("%s ", it.Next())
+	}
+	fmt.Print("\n")
 
 	ibag := Bag{}
 	ibag.Add(1)
@@ -24,7 +27,9 @@ func TestBag(t *testing.T) {
 	ibag.Add(3)
 	ibag.Add(4)
 	ibag.Add(5)
-	for ibag.HasNext() {
-		fmt.Printf("%d ", ibag.Next())
+	it = &ibag
+	for it.HasNext() {
+		fmt.Printf("%d ", it.Next())
 	}
+	fmt.Print("\n")
 }
