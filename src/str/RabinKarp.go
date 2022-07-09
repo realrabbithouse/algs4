@@ -1,10 +1,12 @@
 package str
 
+// The RabinKarp finds the first occurrence of a pattern string in a text string.
+// This implementation uses the Rabin-Karp algorithm.
 type RabinKarp struct {
-	pat     string
-	patHash uint64
+	pat     string // the pattern string
+	patHash int64  // pattern hash value
 	_M      int    // pat length
-	_Q      uint64 // a big prime number
-	_R      int    // base
-	_RM     uint64 // R^(M - 1) % Q
+	_Q      int64  // a large prime, small enough to avoid long overflow
+	_R      int    // radix
+	_RM     int64  // R^(M-1) % Q
 }

@@ -6,13 +6,13 @@ package str
 type KMP struct {
 	r   int
 	m   int
-	dfa [][]int // 状态机
+	dfa [][]int // dfa[i][j]: i for char, j for state
 }
 
-func initDFA(R, N int) [][]int {
+func initDFA(R, m int) [][]int {
 	dfa := make([][]int, R)
 	for i := 0; i < R; i++ {
-		dfa[i] = make([]int, N)
+		dfa[i] = make([]int, m)
 	}
 	return dfa
 }

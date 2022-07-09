@@ -133,7 +133,7 @@ func (sp *DijkstraSP) relax(e graph.DirectedEdge) {
 
 // **************************************************************** //
 
-// The BellmanFordSP class represents a data type for solving the single-source shortest
+// The BellmanFordSP represents a data type for solving the single-source shortest
 // paths problem in edge-weighted digraphs with no negative cycles. The edge weights can
 // be positive, negative, or zero. This class finds either a shortest path from the source
 // vertex s to every other vertex or a negative cycle reachable from the source vertex.

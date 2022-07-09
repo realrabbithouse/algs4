@@ -9,7 +9,7 @@ import (
 
 const _M uint32 = 4 // B-tree of order M, an even number
 
-type state uint8
+type state int8
 
 const (
 	_delete state = iota + 1

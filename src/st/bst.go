@@ -146,15 +146,15 @@ func (bst BST) Max() Key {
 	return max(bst.root).key
 }
 
-func delelteKey(node *Node, key Key) *Node {
+func deleteKey(node *Node, key Key) *Node {
 	if node == nil {
 		return nil
 	}
 	cmp := key.CompareTo(node.key)
 	if cmp < 0 {
-		node.left = delelteKey(node.left, key)
+		node.left = deleteKey(node.left, key)
 	} else if cmp > 0 {
-		node.right = delelteKey(node.right, key)
+		node.right = deleteKey(node.right, key)
 	} else {
 		if node.left == nil {
 			return node.right
@@ -173,7 +173,7 @@ func delelteKey(node *Node, key Key) *Node {
 }
 
 func (bst *BST) Delete(key Key) {
-	bst.root = delelteKey(bst.root, key)
+	bst.root = deleteKey(bst.root, key)
 }
 
 // floor returns the maximum node less than the given key.

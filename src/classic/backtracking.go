@@ -32,6 +32,7 @@ import (
 // 1. Decision Problem – In this, we search for a feasible solution.
 // 2. Optimization Problem – In this, we search for the best solution.
 // 3. Enumeration Problem – In this, we find all feasible solutions.
+//
 
 const _nQueen = 8
 
