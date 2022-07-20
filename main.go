@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-
+	fmt.Println("Hello, world!")
 }
 
 // primeFactors 质因子分解
