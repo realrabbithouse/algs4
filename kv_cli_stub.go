@@ -1,20 +1,20 @@
 package main
 
 import (
-	"algs4/src/rpcdef"
-	"algs4/src/rpcdef/kv"
+	"algs4/rpcplay"
+	kv2 "algs4/rpcplay/kv"
 	"fmt"
 	"log"
 )
 
-func put(cli *kv.Client, k, v string) (err error) {
-	var putReply kv.PutReply
-	err = cli.PutCall(kv.PutRequest{Key: k, Value: v}, &putReply)
+func put(cli *kv2.Client, k, v string) (err error) {
+	var putReply kv2.PutReply
+	err = cli.PutCall(kv2.PutRequest{Key: k, Value: v}, &putReply)
 	if err != nil {
 		return
 	}
 	switch putReply.Err {
-	case kv.OK:
+	case kv2.OK:
 		fmt.Printf("put (%s, %s) succeed\n", k, v)
 	default:
 		fmt.Printf("put (%s, %s) fail\n", k, v)
@@ -22,16 +22,16 @@ func put(cli *kv.Client, k, v string) (err error) {
 	return
 }
 
-func get(cli *kv.Client, k string) (v string, err error) {
-	var getReply kv.GetReply
-	err = cli.GetCall(kv.GetRequest{Key: k}, &getReply)
+func get(cli *kv2.Client, k string) (v string, err error) {
+	var getReply kv2.GetReply
+	err = cli.GetCall(kv2.GetRequest{Key: k}, &getReply)
 	if err != nil {
 		return
 	}
 	switch getReply.Err {
-	case kv.OK:
+	case kv2.OK:
 		fmt.Printf("get %s succeed: %s\n", k, getReply.Value)
-	case kv.NotFound:
+	case kv2.NotFound:
 		fmt.Printf("get %s fial: not found\n", k)
 	default:
 		fmt.Println("undefined get reply")
@@ -41,7 +41,7 @@ func get(cli *kv.Client, k string) (v string, err error) {
 }
 
 func main() {
-	cli, err := kv.ConnKVService(rpcdef.TCP, rpcdef.DefaultAddr)
+	cli, err := kv2.ConnKVService(rpcplay.TCP, rpcplay.DefaultAddr)
 	if err != nil {
 		log.Fatal("connect err:", err)
 	}

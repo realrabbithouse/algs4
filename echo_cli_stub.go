@@ -1,8 +1,8 @@
 package main
 
 import (
-	"algs4/src/rpcdef"
-	"algs4/src/rpcdef/echo"
+	"algs4/rpcplay"
+	"algs4/rpcplay/echo"
 	"bufio"
 	"fmt"
 	"io"
@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	cli, err := echo.ConnEchoService(rpcdef.TCP, rpcdef.DefaultAddr)
+	cli, err := echo.ConnEchoService(rpcplay.TCP, rpcplay.DefaultAddr)
 	defer cli.Close()
 	if err != nil {
 		log.Fatal("connect err:", err)
@@ -26,7 +26,10 @@ func main() {
 		if err != nil {
 			log.Fatal("read err:", err)
 		}
-		cli.EchoCall(line, &reply)
+		err = cli.EchoCall(line, &reply)
+		if err != nil {
+			log.Fatal("echo call err:", err)
+		}
 		fmt.Print(reply)
 	}
 }

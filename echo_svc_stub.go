@@ -1,6 +1,8 @@
 package main
 
-import "algs4/src/rpcdef/echo"
+import (
+	"algs4/rpcplay/echo"
+)
 
 func main() {
 	echo.RunServer()

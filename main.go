@@ -327,7 +327,7 @@ type MyCircularDeque struct {
 //func Constructor(k int) MyCircularDeque {
 //	return MyCircularDeque{
 //		Cap:   k,
-//		data:  make([]int, k),
+//		testdata:  make([]int, k),
 //		first: -1,
 //		last:  -1,
 //	}
