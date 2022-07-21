@@ -6,8 +6,8 @@ type Client struct {
 	*rpc.Client
 }
 
-// ConnEchoService connects to the echo service provider.
-func ConnEchoService(network, addr string) (*Client, error) {
+// NewClient connects to the echo service provider.
+func NewClient(network, addr string) (*Client, error) {
 	cli, err := rpc.Dial(network, addr)
 	if err != nil {
 		return nil, err

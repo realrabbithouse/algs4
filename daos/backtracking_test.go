@@ -1,4 +1,4 @@
-package classic
+package daos
 
 import (
 	"fmt"

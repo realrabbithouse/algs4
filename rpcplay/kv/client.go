@@ -9,7 +9,7 @@ type Client struct {
 	*rpc.Client
 }
 
-func ConnKVService(network, addr string) (*Client, error) {
+func NewKVServiceClient(network, addr string) (*Client, error) {
 	cli, err := rpc.Dial(network, addr)
 	if err != nil {
 		return nil, err

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"algs4/rpcplay"
+	"algs4/config"
 	kv2 "algs4/rpcplay/kv"
 	"fmt"
 	"log"
@@ -41,13 +41,12 @@ func get(cli *kv2.Client, k string) (v string, err error) {
 }
 
 func main() {
-	cli, err := kv2.ConnKVService(rpcplay.TCP, rpcplay.DefaultAddr)
+	cli, err := kv2.NewKVServiceClient(config.TCP, config.DefaultAddr)
 	if err != nil {
 		log.Fatal("connect err:", err)
 	}
 	defer cli.Close()
 
-	err = put(cli, "hia", "hia")
 	err = cli.Put("hi", "hello")
 	if err != nil {
 		log.Println("put err:", err)
@@ -68,7 +67,6 @@ func main() {
 	if err != nil {
 		log.Println("put err:", err)
 	}
-
 	_, err = cli.Get("hi")
 	if err != nil {
 		log.Println("get err:", err)

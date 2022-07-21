@@ -1,8 +1,7 @@
 package echo
 
 import (
-	"algs4/rpcplay"
-	"fmt"
+	"algs4/config"
 	"log"
 	"net"
 	"net/rpc"
@@ -23,13 +22,13 @@ func RunServer() {
 	if err != nil {
 		log.Fatal("register err:", err)
 	}
-	listener, err := net.Listen(rpcplay.TCP, rpcplay.DefaultAddr)
+	listener, err := net.Listen(config.TCP, config.DefaultAddr)
 	if err != nil {
 		log.Fatal("listen err:", err)
 	}
 	defer listener.Close()
 
-	fmt.Println("echo service started at", rpcplay.DefaultAddr)
+	log.Println("echo service started at", config.DefaultAddr)
 	for {
 		conn, err := listener.Accept()
 		if err != nil {

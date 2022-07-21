@@ -1,4 +1,4 @@
-package rpcplay
+package config
 
 const (
 	TCP         = "tcp"
