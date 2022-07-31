@@ -154,8 +154,6 @@ func (minPQ *IndexMinPQ) DelMin() int {
 		return -1
 	}
 	min := minPQ.pq[1]
-	//minKey := minPQ.keys[min]
-	//fmt.Printf("delete min: min index: %d, min value: %d\n", min, minKey)
 	minPQ.swap(1, minPQ.n)
 	minPQ.n--
 	minPQ.sink(1)

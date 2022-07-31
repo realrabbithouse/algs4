@@ -3,7 +3,6 @@ package sort
 import (
 	"algs4/typ"
 	"fmt"
-	"time"
 )
 
 // Heap as a maximum priority queue.
@@ -34,7 +33,6 @@ func (h *Heap) sink(k, n int) {
 }
 
 func (h *Heap) Sort() {
-	ts := time.Now()
 	// Heap construction
 	n := len(h.pq)
 	for k := n / 2; k >= 1; k-- {
@@ -45,7 +43,6 @@ func (h *Heap) Sort() {
 		h.swap(1, k)
 		h.sink(1, k-1)
 	}
-	fmt.Println("heap sort time:", time.Since(ts))
 }
 
 func (h Heap) Show() {

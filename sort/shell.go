@@ -2,8 +2,6 @@ package sort
 
 import (
 	"algs4/typ"
-	"fmt"
-	"time"
 )
 
 // Shell is an optimized version of insertion sort.
@@ -33,8 +31,6 @@ func (s Shell) hGapSort(h int) {
 }
 
 func ShellSort(slice typ.ComparableSlice) {
-	ts := time.Now()
 	shell := Shell{slice: slice}
 	shell.sort()
-	fmt.Println("Shell sort time:", time.Since(ts))
 }

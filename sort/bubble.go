@@ -2,8 +2,6 @@ package sort
 
 import (
 	"algs4/typ"
-	"fmt"
-	"time"
 )
 
 type Bubble struct {
@@ -22,8 +20,6 @@ func (s Bubble) sort() {
 }
 
 func BubbleSort(slice typ.ComparableSlice) {
-	ts := time.Now()
 	bubble := Bubble{slice: slice}
 	bubble.sort()
-	fmt.Println("bubble sort time:", time.Since(ts))
 }

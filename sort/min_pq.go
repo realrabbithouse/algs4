@@ -2,8 +2,8 @@ package sort
 
 import (
 	"algs4/typ"
+	"errors"
 	"fmt"
-	"time"
 )
 
 // MinPQ Minimum Priority Queue.
@@ -22,12 +22,10 @@ func NewMinPQWithCap(initCap int) *MinPQ {
 }
 
 func NewMinPQWithKeys(keys []typ.Comparable) *MinPQ {
-	ts := time.Now()
 	minPQ := NewMinPQWithCap(len(keys))
 	for i := range keys {
 		minPQ.Insert(keys[i])
 	}
-	fmt.Println("maximum priority queue construct time:", time.Since(ts))
 	return minPQ
 }
 
@@ -42,7 +40,8 @@ func (minPQ MinPQ) Size() int {
 func (minPQ *MinPQ) Insert(k typ.Comparable) {
 	minPQ.n++
 	if minPQ.n == len(minPQ.pq) {
-		minPQ.pq = append(minPQ.pq, k) // 增长切片长度
+		// 扩容
+		minPQ.pq = append(minPQ.pq, k)
 	} else {
 		minPQ.pq[minPQ.n] = k
 	}
@@ -50,43 +49,40 @@ func (minPQ *MinPQ) Insert(k typ.Comparable) {
 }
 
 func (minPQ MinPQ) Min() typ.Comparable {
-	if minPQ.IsEmpty() {
-		fmt.Println("priority queue underflow")
-		return nil
+	if minPQ.n == 0 {
+		panic("priority queue underflow")
 	}
 	return minPQ.pq[1]
 }
 
 func (minPQ *MinPQ) DelMin() typ.Comparable {
-	if minPQ.IsEmpty() {
-		fmt.Println("priority queue underflow")
-		return nil
+	if minPQ.n == 0 {
+		panic("priority queue underflow")
 	}
 	min := minPQ.pq[1]
 	minPQ.swap(1, minPQ.n)
 	minPQ.pq[minPQ.n] = nil
 	minPQ.n--
 	minPQ.sink(1)
-	if minPQ.n > 0 && minPQ.n == (len(minPQ.pq)-1)/4 {
-		fmt.Println("resize from", len(minPQ.pq), "to", len(minPQ.pq)/2, "where n equals", minPQ.n)
+	if minPQ.n > 0 && minPQ.n == (cap(minPQ.pq)-1)/4 {
+		fmt.Printf("resize from %d to %d where n = %d\n", cap(minPQ.pq), (cap(minPQ.pq)-1)/2, minPQ.n)
 		minPQ.resize(len(minPQ.pq) / 2)
 	}
 	return min
 }
 
-func (minPQ *MinPQ) MinK(k int) []typ.Comparable {
+func (minPQ *MinPQ) MinK(k int) ([]typ.Comparable, error) {
 	if k > minPQ.n {
-		fmt.Println("elements in priority queue not enough")
-		return nil
+		return nil, errors.New("elements in priority queue are not enough")
 	}
 	minK := make([]typ.Comparable, 0, k)
 	for i := 0; i < k; i++ {
 		minK = append(minK, minPQ.DelMin())
 	}
-	return minK
+	return minK, nil
 }
 
-func (minPQ MinPQ) isMinHeap() bool {
+func (minPQ MinPQ) IsMinHeap() bool {
 	for i := 1; i < minPQ.n+1; i++ {
 		if minPQ.pq[i] == nil {
 			fmt.Println("not min heap due to [1~n]", minPQ.n)

@@ -2,8 +2,6 @@ package sort
 
 import (
 	"algs4/typ"
-	"fmt"
-	"time"
 )
 
 type Selection struct {
@@ -24,8 +22,6 @@ func (s *Selection) sort() {
 }
 
 func SelectionSort(slice typ.ComparableSlice) {
-	ts := time.Now()
 	selection := Selection{slice: slice}
 	selection.sort()
-	fmt.Println("selection sort time:", time.Since(ts))
 }

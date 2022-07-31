@@ -2,8 +2,8 @@ package sort
 
 import (
 	"algs4/typ"
+	"errors"
 	"fmt"
-	"time"
 )
 
 //
@@ -16,13 +16,6 @@ type MaxPQ struct {
 	pq []typ.Comparable
 }
 
-//func NewMaxPQ() *MaxPQ {
-//	return &MaxPQ{
-//		n:  0,
-//		pq: []Comparable{nil},
-//	}
-//}
-
 func NewMaxPQWithCap(initCap int) *MaxPQ {
 	pq := make([]typ.Comparable, 1, initCap+1)
 	pq[0] = nil
@@ -33,12 +26,10 @@ func NewMaxPQWithCap(initCap int) *MaxPQ {
 }
 
 func NewMaxPQWithKeys(keys []typ.Comparable) *MaxPQ {
-	ts := time.Now()
 	maxPQ := NewMaxPQWithCap(len(keys))
 	for i := range keys {
 		maxPQ.Insert(keys[i])
 	}
-	fmt.Println("maximum priority queue construct time:", time.Since(ts))
 	return maxPQ
 }
 
@@ -71,6 +62,7 @@ func (q *MaxPQ) DelMax() typ.Comparable {
 	q.sink(1)
 	// 缩容
 	if q.n > 0 && q.n == (cap(q.pq)-1)/4 {
+		fmt.Printf("resize from %d to %d where n = %d\n", cap(q.pq), (cap(q.pq)-1)/2, q.n)
 		q.pq = q.pq[:(cap(q.pq)-1)/2]
 	}
 	return max
@@ -113,14 +105,14 @@ func (q *MaxPQ) sink(k int) {
 	}
 }
 
-func (q MaxPQ) isMaxHeap() bool {
-	for i := 1; i < q.n+1; i++ {
+func (q MaxPQ) IsMaxHeap() bool {
+	for i := 1; i <= q.n; i++ {
 		if q.pq[i] == nil {
 			fmt.Println("not max heap due to [1~n]")
 			return false
 		}
 	}
-	for i := q.n + 1; i < len(q.pq); i++ {
+	for i := q.n + 1; i < cap(q.pq); i++ {
 		if q.pq[i] != nil {
 			fmt.Println("not max heap due to [n+1~cap]")
 			return false
@@ -143,14 +135,13 @@ func (q MaxPQ) isMaxHeapOrdered() bool {
 	return true
 }
 
-func (q *MaxPQ) TopK(k int) []typ.Comparable {
+func (q *MaxPQ) TopK(k int) ([]typ.Comparable, error) {
 	if k > q.n {
-		fmt.Println("elements in priority queue not enough")
-		return nil
+		return nil, errors.New("elements in priority queue are not enough")
 	}
 	topK := make([]typ.Comparable, 0, k)
 	for i := 0; i < k; i++ {
 		topK = append(topK, q.DelMax())
 	}
-	return topK
+	return topK, nil
 }

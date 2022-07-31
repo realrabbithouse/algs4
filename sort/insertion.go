@@ -2,8 +2,6 @@ package sort
 
 import (
 	"algs4/typ"
-	"fmt"
-	"time"
 )
 
 // Insertion loop: i = [1 ~ n), j = [i, 1]
@@ -11,7 +9,7 @@ type Insertion struct {
 	slice typ.ComparableSlice
 }
 
-// This sort function is not a real Insertion policy.
+// This sort function is not correct.
 func (s Insertion) fakesort() {
 	var n = s.slice.Len()
 	for i := 1; i < n; i++ {
@@ -42,8 +40,6 @@ func (s Insertion) sort() {
 }
 
 func InsertionSort(slice typ.ComparableSlice) {
-	ts := time.Now()
 	insertion := Insertion{slice: slice}
 	insertion.sort()
-	fmt.Println("insertion sort time:", time.Since(ts))
 }

@@ -2,8 +2,6 @@ package sort
 
 import (
 	"algs4/typ"
-	"fmt"
-	"time"
 )
 
 //
@@ -56,8 +54,6 @@ func (s IntSliceMergeSort) sort() {
 }
 
 func MergeSortInt(slice []int) {
-	ts := time.Now()
 	merge := IntSliceMergeSort{slice}
 	merge.sort()
-	fmt.Println("merge sort time:", time.Since(ts))
 }
