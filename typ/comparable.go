@@ -28,9 +28,6 @@ func (s IntSlice) IsSorted() bool {
 	}
 	return true
 }
-func (s IntSlice) New(sz int) ComparableSlice {
-	return IntSlice(make([]int, sz))
-}
 
 type StringSlice []string
 
