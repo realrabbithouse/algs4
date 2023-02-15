@@ -1,7 +1,6 @@
 package graph
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -10,9 +9,7 @@ func TestDigraph(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	fmt.Println(digraph)
-	reverse := digraph.Reverse()
-	fmt.Println(reverse)
+
 	var tests = []struct {
 		input  int
 		wanted int

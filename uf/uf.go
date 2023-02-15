@@ -44,7 +44,7 @@ func NewUnionFind(n int) (*UnionFind, error) {
 	return &uf, nil
 }
 
-func (uf UnionFind) Find(p int) int {
+func (uf *UnionFind) Find(p int) int {
 	err := uf.validate(p)
 	if err != nil {
 		fmt.Println("Find err:", err)
@@ -83,7 +83,7 @@ func (uf *UnionFind) Union(p, q int) {
 	uf.count--
 }
 
-func (uf UnionFind) Connected(p, q int) bool {
+func (uf *UnionFind) Connected(p, q int) bool {
 	pf, qf := uf.Find(p), uf.Find(q)
 	if pf == -1 || qf == -1 {
 		return false
@@ -91,11 +91,11 @@ func (uf UnionFind) Connected(p, q int) bool {
 	return pf == qf
 }
 
-func (uf UnionFind) Count() int {
+func (uf *UnionFind) Count() int {
 	return uf.count
 }
 
-func (uf UnionFind) validate(p int) error {
+func (uf *UnionFind) validate(p int) error {
 	if p < 0 || p >= len(uf.parent) {
 		return errors.New(fmt.Sprintf("index %d is not between 0 and %d", p, len(uf.parent)-1))
 	}

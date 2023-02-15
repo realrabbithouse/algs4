@@ -21,7 +21,7 @@ type Bag struct {
 	n     int
 }
 
-func (b Bag) IsEmpty() bool {
+func (b *Bag) IsEmpty() bool {
 	return b.first == nil
 }
 
@@ -35,7 +35,7 @@ func (b *Bag) Add(item interface{}) {
 	b.n++
 }
 
-func (b Bag) Size() int {
+func (b *Bag) Size() int {
 	return b.n
 }
 
@@ -53,7 +53,7 @@ func (b *Bag) Next() interface{} {
 	return ret
 }
 
-func (b Bag) String() string {
+func (b *Bag) String() string {
 	var builder strings.Builder
 	builder.WriteString("bag: [ ")
 	for b.HasNext() {

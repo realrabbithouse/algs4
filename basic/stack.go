@@ -54,7 +54,7 @@ func (stack *Stack) Next() interface{} {
 	return val
 }
 
-func (stack Stack) String() string {
+func (stack *Stack) String() string {
 	var builder strings.Builder
 	builder.WriteString("stack: [ ")
 	for stack.HasNext() {
