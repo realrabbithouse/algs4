@@ -1,26 +1,27 @@
 package graphapp
 
 import (
-	basic2 "algs4/basic"
-	graph2 "algs4/graph"
 	"errors"
+
+	"algs4/basic"
+	"algs4/graph"
 )
 
 type DirectedCycle struct {
-	digraph *graph2.Digraph
-	edgeTo  []graph2.ID
+	digraph *graph.Digraph
+	edgeTo  []graph.ID
 	marked  []bool
 	onStack []bool
-	cycle   *basic2.Stack
+	cycle   *basic.Stack
 }
 
-func NewDirectedCycle(digraph *graph2.Digraph) (*DirectedCycle, error) {
+func NewDirectedCycle(digraph *graph.Digraph) (*DirectedCycle, error) {
 	if digraph == nil {
 		return nil, errors.New("argument is nil")
 	}
 	cycle := DirectedCycle{
 		digraph: digraph,
-		edgeTo:  make([]graph2.ID, digraph.V),
+		edgeTo:  make([]graph.ID, digraph.V),
 		marked:  make([]bool, digraph.V),
 		onStack: make([]bool, digraph.V),
 	}
@@ -36,12 +37,12 @@ func (c *DirectedCycle) HasCycle() bool {
 	return c.cycle != nil
 }
 
-func (c *DirectedCycle) Cycle() []graph2.ID {
-	cycle := make([]graph2.ID, 0, c.cycle.Size())
-	var iter basic2.Iterator = c.cycle
+func (c *DirectedCycle) Cycle() []graph.ID {
+	cycle := make([]graph.ID, 0, c.cycle.Size())
+	var iter basic.Iterator = c.cycle
 	for iter.HasNext() {
 		v := iter.Next()
-		cycle = append(cycle, v.(graph2.ID))
+		cycle = append(cycle, v.(graph.ID))
 	}
 	return cycle
 }
@@ -57,15 +58,15 @@ func (c *DirectedCycle) dfs(v int) {
 				return
 			}
 			if !c.marked[w] {
-				c.edgeTo[w] = graph2.ID(v)
+				c.edgeTo[w] = graph.ID(v)
 				c.dfs(int(w))
 			} else if c.onStack[w] { // A node cannot be on stack if it is not marked yet.
-				c.cycle = new(basic2.Stack)
-				for i := graph2.ID(v); i != w; i = c.edgeTo[i] {
+				c.cycle = new(basic.Stack)
+				for i := graph.ID(v); i != w; i = c.edgeTo[i] {
 					c.cycle.Push(i)
 				}
 				c.cycle.Push(w)
-				c.cycle.Push(graph2.ID(v))
+				c.cycle.Push(graph.ID(v))
 			}
 		}
 		c.onStack[v] = false

@@ -1,9 +1,10 @@
 package graphapp
 
 import (
-	graph2 "algs4/graph"
 	"errors"
 	"fmt"
+
+	"algs4/graph"
 )
 
 //
@@ -28,11 +29,11 @@ import (
 
 // Topological 拓扑排序
 type Topological struct {
-	order []graph2.ID
+	order []graph.ID
 	rank  []int
 }
 
-func NewTopological(digraph *graph2.Digraph) (*Topological, error) {
+func NewTopological(digraph *graph.Digraph) (*Topological, error) {
 	if digraph == nil {
 		return nil, errors.New("argument is nil")
 	}
@@ -54,7 +55,7 @@ func (t *Topological) HasOrder() bool {
 	return t.order != nil
 }
 
-func (t *Topological) Order() []graph2.ID {
+func (t *Topological) Order() []graph.ID {
 	return t.order
 }
 

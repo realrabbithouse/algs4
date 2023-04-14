@@ -1,10 +1,10 @@
 package sort
 
 import (
-	"algs4/fileops"
-	"algs4/typ"
 	"testing"
 
+	"algs4/fileops"
+	"algs4/typ"
 	"github.com/stretchr/testify/require"
 )
 

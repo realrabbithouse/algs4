@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	cli, err := echo.NewClient(config.TCP, config.DefaultAddr)
+	cli, err := echo.NewClient(config.TCP, config.TestHost)
 	if err != nil {
 		logrus.Fatal(err)
 	}

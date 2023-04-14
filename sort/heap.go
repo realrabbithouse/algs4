@@ -1,8 +1,9 @@
 package sort
 
 import (
-	"algs4/typ"
 	"fmt"
+
+	"algs4/typ"
 )
 
 // Heap as a maximum priority queue.

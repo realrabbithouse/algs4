@@ -1,28 +1,29 @@
 package graphapp
 
 import (
-	basic2 "algs4/basic"
-	graph2 "algs4/graph"
-	"algs4/sort"
-	"algs4/typ"
 	"errors"
 	"fmt"
 	"math"
+
+	"algs4/basic"
+	"algs4/graph"
+	"algs4/sort"
+	"algs4/typ"
 )
 
 const PositiveInfinity = math.MaxFloat64
 
 // ShortestPath is the interface that wrap the single-source shortest paths methods.
 type ShortestPath interface {
-	HashPathTo(id graph2.ID) bool
-	PathTo(id graph2.ID) basic2.Iterator
-	DistTo(id graph2.ID) float64
+	HashPathTo(id graph.ID) bool
+	PathTo(id graph.ID) basic.Iterator
+	DistTo(id graph.ID) float64
 }
 
 type NegativeWeightSP interface {
 	ShortestPath
 	HasNegativeCycle() bool
-	NegativeCycle() basic2.Iterator
+	NegativeCycle() basic.Iterator
 }
 
 // **************************************************************** //
@@ -31,13 +32,13 @@ type NegativeWeightSP interface {
 // problem in edge-weighted digraphs where the edge weights are non-negative.
 type DijkstraSP struct {
 	distTo []float64
-	edgeTo []graph2.DirectedEdge
+	edgeTo []graph.DirectedEdge
 	pq     *sort.IndexMinPQ
-	G      *graph2.EdgeWeightedDigraph
-	source graph2.ID
+	G      *graph.EdgeWeightedDigraph
+	source graph.ID
 }
 
-func NewDijkstraSP(G *graph2.EdgeWeightedDigraph, s int) (*DijkstraSP, error) {
+func NewDijkstraSP(G *graph.EdgeWeightedDigraph, s int) (*DijkstraSP, error) {
 	if G == nil {
 		return nil, errors.New("argument is nil")
 	}
@@ -54,7 +55,7 @@ func NewDijkstraSP(G *graph2.EdgeWeightedDigraph, s int) (*DijkstraSP, error) {
 	}
 
 	distTo := make([]float64, V)
-	edgeTo := make([]graph2.DirectedEdge, V)
+	edgeTo := make([]graph.DirectedEdge, V)
 	for i := 0; i < V; i++ {
 		distTo[i] = PositiveInfinity
 	}
@@ -67,7 +68,7 @@ func NewDijkstraSP(G *graph2.EdgeWeightedDigraph, s int) (*DijkstraSP, error) {
 		edgeTo: edgeTo,
 		pq:     pq,
 		G:      G,
-		source: graph2.ID(s),
+		source: graph.ID(s),
 	}
 	for !pq.IsEmpty() {
 		v := pq.DelMin()
@@ -79,7 +80,7 @@ func NewDijkstraSP(G *graph2.EdgeWeightedDigraph, s int) (*DijkstraSP, error) {
 	return &sp, nil
 }
 
-func (sp DijkstraSP) HasPathTo(id graph2.ID) bool {
+func (sp DijkstraSP) HasPathTo(id graph.ID) bool {
 	if err := sp.validateIndex(int(id)); err != nil {
 		fmt.Println("HasPathTo err:", err)
 		return false
@@ -87,13 +88,13 @@ func (sp DijkstraSP) HasPathTo(id graph2.ID) bool {
 	return sp.distTo[id] < PositiveInfinity
 }
 
-func (sp DijkstraSP) PathTo(id graph2.ID) basic2.Iterator {
+func (sp DijkstraSP) PathTo(id graph.ID) basic.Iterator {
 	if err := sp.validateIndex(int(id)); err != nil {
 		fmt.Println("PathTo err:", err)
 		return nil
 	}
-	path := new(basic2.Stack)
-	var e graph2.DirectedEdge
+	path := new(basic.Stack)
+	var e graph.DirectedEdge
 	for e = sp.edgeTo[id]; e.Src() != sp.source; e = sp.edgeTo[e.Src()] {
 		tmp := e
 		path.Push(tmp)
@@ -102,7 +103,7 @@ func (sp DijkstraSP) PathTo(id graph2.ID) basic2.Iterator {
 	return path
 }
 
-func (sp DijkstraSP) DistTo(id graph2.ID) float64 {
+func (sp DijkstraSP) DistTo(id graph.ID) float64 {
 	if err := sp.validateIndex(int(id)); err != nil {
 		fmt.Println("DistTo err:", err)
 		return 0.0
@@ -118,7 +119,7 @@ func (sp DijkstraSP) validateIndex(v int) error {
 	return nil
 }
 
-func (sp *DijkstraSP) relax(e graph2.DirectedEdge) {
+func (sp *DijkstraSP) relax(e graph.DirectedEdge) {
 	v, w := e.Src(), e.Dst()
 	if sp.distTo[w] > sp.distTo[v]+e.Weight() {
 		sp.distTo[w] = sp.distTo[v] + e.Weight()
@@ -142,10 +143,10 @@ func (sp *DijkstraSP) relax(e graph2.DirectedEdge) {
 // floating-point rounding error or arithmetic overflow. This is the case if all
 // edge weights are integers and if none of the intermediate results exceeds 2^52.
 type BellmanFordSP struct {
-	distTo  []float64             // distTo[v] = distance  of shortest s->v path
-	edgeTo  []graph2.DirectedEdge // edgeTo[v] = last edge on shortest s->v path
-	onQueue []bool                // onQueue[v] = is v currently on the queue?
-	queue   *basic2.Queue         // queue of vertices to relax
-	cost    int                   // number of calls to relax()
-	cycle   *basic2.Stack         // negative cycle (or null if no such cycle)
+	distTo  []float64            // distTo[v] = distance  of shortest s->v path
+	edgeTo  []graph.DirectedEdge // edgeTo[v] = last edge on shortest s->v path
+	onQueue []bool               // onQueue[v] = is v currently on the queue?
+	queue   *basic.Queue         // queue of vertices to relax
+	cost    int                  // number of calls to relax()
+	cycle   *basic.Stack         // negative cycle (or null if no such cycle)
 }

@@ -1,9 +1,10 @@
 package sort
 
 import (
-	"algs4/typ"
 	"math/rand"
 	"time"
+
+	"algs4/typ"
 )
 
 //

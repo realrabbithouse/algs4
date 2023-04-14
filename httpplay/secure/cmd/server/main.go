@@ -18,7 +18,7 @@ func main() {
 	flag.Parse()
 
 	server := &http.Server{
-		Addr:         config.DefaultAddr,
+		Addr:         config.TestHost,
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		TLSConfig:    tlsConfig(),

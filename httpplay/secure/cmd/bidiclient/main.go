@@ -33,7 +33,7 @@ func main() {
 		ServerName:         "rabbit.com", // server cert common name
 	}
 
-	conn, err := tls.Dial("tcp", config.DefaultAddr, cfg)
+	conn, err := tls.Dial("tcp", config.TestHost, cfg)
 	if err != nil {
 		logrus.Fatal(err)
 	}

@@ -1,8 +1,9 @@
 package daos
 
 import (
-	"algs4/basic"
 	"fmt"
+
+	"algs4/basic"
 )
 
 //

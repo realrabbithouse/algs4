@@ -1,38 +1,39 @@
 package graphapp
 
 import (
-	basic2 "algs4/basic"
-	graph2 "algs4/graph"
-	"algs4/sort"
-	"algs4/uf"
 	"errors"
 	"fmt"
 	ofsort "sort"
+
+	"algs4/basic"
+	"algs4/graph"
+	"algs4/sort"
+	"algs4/uf"
 )
 
 // MST defines a minimum spanning tree that wraps the basic minimum
 // spanning tree functionalities.
 type MST interface {
 	Weight() float64
-	Edges() []graph2.Edge
+	Edges() []graph.Edge
 }
 
 // **************************************************************** //
 
 type LazyPrimMST struct {
-	marked []bool        // marked[v] = true iff v on tree
-	mst    *basic2.Queue // edges in the MST
-	pq     *sort.MinPQ   // edges with one endpoint in tree
-	weight float64       // total weight of MST
+	marked []bool       // marked[v] = true iff v on tree
+	mst    *basic.Queue // edges in the MST
+	pq     *sort.MinPQ  // edges with one endpoint in tree
+	weight float64      // total weight of MST
 }
 
-func NewLazyPrimMST(G *graph2.EdgeWeightedGraph) (*LazyPrimMST, error) {
+func NewLazyPrimMST(G *graph.EdgeWeightedGraph) (*LazyPrimMST, error) {
 	if G == nil {
 		return nil, errors.New("argument is nil")
 	}
 	prim := LazyPrimMST{
 		marked: make([]bool, G.V),
-		mst:    new(basic2.Queue),
+		mst:    new(basic.Queue),
 		pq:     sort.NewMinPQWithCap(G.V),
 	}
 	// Run Prim from all vertices to get a minimum spanning forest.
@@ -40,7 +41,7 @@ func NewLazyPrimMST(G *graph2.EdgeWeightedGraph) (*LazyPrimMST, error) {
 		if !prim.marked[i] {
 			prim.visit(G, i)
 			for !prim.pq.IsEmpty() {
-				edge := prim.pq.DelMin().(graph2.Edge)
+				edge := prim.pq.DelMin().(graph.Edge)
 				v := edge.Either()
 				w, _ := edge.Other(v)
 				if prim.marked[v] && prim.marked[w] {
@@ -59,12 +60,12 @@ func NewLazyPrimMST(G *graph2.EdgeWeightedGraph) (*LazyPrimMST, error) {
 	return &prim, nil
 }
 
-func (p LazyPrimMST) Edges() []graph2.Edge {
+func (p LazyPrimMST) Edges() []graph.Edge {
 	N := p.mst.Size()
-	var iter basic2.Iterator = p.mst
-	edges := make([]graph2.Edge, 0, N)
+	var iter basic.Iterator = p.mst
+	edges := make([]graph.Edge, 0, N)
 	for iter.HasNext() {
-		edges = append(edges, iter.Next().(graph2.Edge))
+		edges = append(edges, iter.Next().(graph.Edge))
 	}
 	return edges
 }
@@ -73,14 +74,14 @@ func (p LazyPrimMST) Weight() float64 {
 	return p.weight
 }
 
-func (p *LazyPrimMST) visit(G *graph2.EdgeWeightedGraph, v int) {
+func (p *LazyPrimMST) visit(G *graph.EdgeWeightedGraph, v int) {
 	if err := p.validateIndex(v); err != nil {
 		fmt.Println("Invalid index:", err)
 		return
 	}
 	p.marked[v] = true
 	for _, edge := range G.Adj(v) {
-		w, _ := edge.Other(graph2.ID(v))
+		w, _ := edge.Other(graph.ID(v))
 		if !p.marked[w] {
 			p.pq.Insert(edge)
 		}
@@ -100,11 +101,11 @@ func (p *LazyPrimMST) validateIndex(v int) error {
 // connected, it computes a minimum spanning forest, which is the union of minimum spanning trees in
 // each connected component.
 type KruskalMST struct {
-	mst    *basic2.Queue
+	mst    *basic.Queue
 	weight float64
 }
 
-func NewKruskalMST(G *graph2.EdgeWeightedGraph) (*KruskalMST, error) {
+func NewKruskalMST(G *graph.EdgeWeightedGraph) (*KruskalMST, error) {
 	if G == nil {
 		return nil, errors.New("argument is nil")
 	}
@@ -113,9 +114,9 @@ func NewKruskalMST(G *graph2.EdgeWeightedGraph) (*KruskalMST, error) {
 		return nil, err
 	}
 	kruskal := KruskalMST{
-		mst: new(basic2.Queue),
+		mst: new(basic.Queue),
 	}
-	edges := make([]graph2.Edge, G.E)
+	edges := make([]graph.Edge, G.E)
 	copy(edges, G.Edges())
 	ofsort.Slice(edges, func(i, j int) bool {
 		return edges[i].CompareTo(edges[j]) < 0
@@ -133,12 +134,12 @@ func NewKruskalMST(G *graph2.EdgeWeightedGraph) (*KruskalMST, error) {
 	return &kruskal, nil
 }
 
-func (k *KruskalMST) Edges() []graph2.Edge {
+func (k *KruskalMST) Edges() []graph.Edge {
 	N := k.mst.Size()
-	var iter basic2.Iterator = k.mst
-	edges := make([]graph2.Edge, 0, N)
+	var iter basic.Iterator = k.mst
+	edges := make([]graph.Edge, 0, N)
 	for iter.HasNext() {
-		edges = append(edges, iter.Next().(graph2.Edge))
+		edges = append(edges, iter.Next().(graph.Edge))
 	}
 	return edges
 }

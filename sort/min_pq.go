@@ -1,9 +1,10 @@
 package sort
 
 import (
-	"algs4/typ"
 	"errors"
 	"fmt"
+
+	"algs4/typ"
 )
 
 // MinPQ Minimum Priority Queue.

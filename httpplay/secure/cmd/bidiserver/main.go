@@ -36,7 +36,7 @@ func main() {
 		InsecureSkipVerify: false,
 		ServerName:         "example", // client cert common name
 	}
-	ln, err := tls.Listen("tcp", config.DefaultAddr, cfg)
+	ln, err := tls.Listen("tcp", config.TestHost, cfg)
 	if err != nil {
 		logrus.Fatal(err)
 	}

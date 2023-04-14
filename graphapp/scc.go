@@ -1,16 +1,17 @@
 package graphapp
 
 import (
-	graph2 "algs4/graph"
 	"errors"
 	"fmt"
+
+	"algs4/graph"
 )
 
 // SCC is the interface that wraps the basic methods for strongly connected components.
 type SCC interface {
-	StronglyConnected(v, w graph2.ID) bool
+	StronglyConnected(v, w graph.ID) bool
 	Count() int
-	Which(v graph2.ID) int
+	Which(v graph.ID) int
 }
 
 // **************************************************************** //
@@ -22,7 +23,7 @@ type KosarajuSharirSCC struct {
 	count  int
 }
 
-func NewKosarajuSharirSCC(digraph *graph2.Digraph) (*KosarajuSharirSCC, error) {
+func NewKosarajuSharirSCC(digraph *graph.Digraph) (*KosarajuSharirSCC, error) {
 	if digraph == nil {
 		return nil, errors.New("argument is nil")
 	}
@@ -40,7 +41,7 @@ func NewKosarajuSharirSCC(digraph *graph2.Digraph) (*KosarajuSharirSCC, error) {
 	return &ssc, nil
 }
 
-func (scc KosarajuSharirSCC) StronglyConnected(v, w graph2.ID) bool {
+func (scc KosarajuSharirSCC) StronglyConnected(v, w graph.ID) bool {
 	var err error
 	err = scc.validateVertex(int(v))
 	if err != nil {
@@ -59,7 +60,7 @@ func (scc KosarajuSharirSCC) Count() int {
 	return scc.count
 }
 
-func (scc KosarajuSharirSCC) Which(v graph2.ID) int {
+func (scc KosarajuSharirSCC) Which(v graph.ID) int {
 	err := scc.validateVertex(int(v))
 	if err != nil {
 		fmt.Println("Id err:", err)
@@ -68,7 +69,7 @@ func (scc KosarajuSharirSCC) Which(v graph2.ID) int {
 	return scc.id[v]
 }
 
-func (scc *KosarajuSharirSCC) dfs(digraph *graph2.Digraph, v int) {
+func (scc *KosarajuSharirSCC) dfs(digraph *graph.Digraph, v int) {
 	scc.marked[v] = true
 	scc.id[v] = scc.count
 	for _, w := range digraph.Adj(v) {

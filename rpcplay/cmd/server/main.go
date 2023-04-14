@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	if err := echo.RunServer(config.TCP, config.DefaultAddr, &echo.Handler{}); err != nil {
+	if err := echo.RunServer(config.TCP, config.TestHost, &echo.Handler{}); err != nil {
 		logrus.Fatal(err)
 	}
 }

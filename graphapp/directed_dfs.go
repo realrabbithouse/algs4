@@ -1,9 +1,10 @@
 package graphapp
 
 import (
-	"algs4/graph"
 	"errors"
 	"fmt"
+
+	"algs4/graph"
 )
 
 // DirectedDFS is mainly used for single- and multiple-source reachability.

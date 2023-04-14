@@ -31,7 +31,7 @@ func main() {
 
 	client := &http.Client{Transport: t}
 
-	res, err := client.Get("https://" + config.DefaultAddr)
+	res, err := client.Get("https://" + config.TestHost)
 	if err != nil {
 		logrus.Fatal(err)
 	}
