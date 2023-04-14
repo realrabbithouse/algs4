@@ -1,4 +1,4 @@
-package streye
+package stringops
 
 //
 // 思想：索引计数法，对单个“位”排序，这个“位”可以是数字的某一位或字符串的某一位

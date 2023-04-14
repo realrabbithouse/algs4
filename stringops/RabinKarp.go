@@ -1,4 +1,4 @@
-package streye
+package stringops
 
 // The RabinKarp finds the first occurrence of a pattern string in a text string.
 // This implementation uses the Rabin-Karp algorithm.

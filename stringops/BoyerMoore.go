@@ -1,4 +1,4 @@
-package streye
+package stringops
 
 // BoyerMoore refers to the Boyer-Moore substring search algorithm.
 // * Scan characters in pattern from right to left.

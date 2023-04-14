@@ -9,6 +9,7 @@ type (
 	Value interface{}
 )
 
+// ST is the basic interface for a symbolic table.
 type ST interface {
 	Contains(k Key) bool
 	IsEmpty() bool

@@ -1,4 +1,4 @@
-package streye
+package stringops
 
 // MSD examines the characters in the keys in a left-to-right order,
 // working with the most significant character first.

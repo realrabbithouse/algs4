@@ -1,4 +1,4 @@
-package streye
+package stringops
 
 // KMP Knuth-Morris-Pratt
 // 提前判断如何重新开始查找，这种判断只取决于模式本身

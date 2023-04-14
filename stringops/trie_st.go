@@ -1,4 +1,4 @@
-package streye
+package stringops
 
 import "strings"
 
