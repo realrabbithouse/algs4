@@ -1,21 +1,22 @@
 package main
 
 import (
+	"bufio"
+	"io"
+	"os"
+
 	"algs4/config"
 	"algs4/rpcplay/echo"
-	"bufio"
-	"fmt"
-	"io"
-	"log"
-	"os"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
 	cli, err := echo.NewClient(config.TCP, config.DefaultAddr)
-	defer cli.Close()
 	if err != nil {
-		log.Fatal("connect err:", err)
+		logrus.Fatal(err)
 	}
+	defer cli.Close()
+
 	var reply string
 	reader := bufio.NewReader(os.Stdin)
 	for {
@@ -24,12 +25,12 @@ func main() {
 			break
 		}
 		if err != nil {
-			log.Fatal("read err:", err)
+			logrus.Fatal(err)
 		}
-		err = cli.EchoCall(line, &reply)
-		if err != nil {
-			log.Fatal("echo call err:", err)
+
+		if err := cli.EchoCall(line, &reply); err != nil {
+			logrus.Fatal(err)
 		}
-		fmt.Print(reply)
+		logrus.Info(reply)
 	}
 }

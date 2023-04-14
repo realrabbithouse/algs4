@@ -1,39 +1,67 @@
 package echo
 
 import (
-	"algs4/config"
-	"log"
 	"net"
 	"net/rpc"
+	"net/rpc/jsonrpc"
+
+	"github.com/sirupsen/logrus"
 )
 
 const serviceName = "EchoService"
 
-type ServiceSignature = interface {
+type Service interface {
 	Echo(request string, reply *string) error
 }
 
-func registerService(svc ServiceSignature) error {
+func registerService(svc Service) error {
 	return rpc.RegisterName(serviceName, svc)
 }
 
-func RunServer() {
-	err := registerService(new(Handler))
+func RunServer(network string, address string, svc Service) error {
+	err := registerService(svc)
 	if err != nil {
-		log.Fatal("register err:", err)
+		return err
 	}
-	listener, err := net.Listen(config.TCP, config.DefaultAddr)
-	if err != nil {
-		log.Fatal("listen err:", err)
-	}
-	defer listener.Close()
 
-	log.Println("echo service started at", config.DefaultAddr)
+	lis, err := net.Listen(network, address)
+	if err != nil {
+		return err
+	}
+	defer lis.Close()
+
+	logrus.Infof("Start echo service at %s", address)
 	for {
-		conn, err := listener.Accept()
+		conn, err := lis.Accept()
 		if err != nil {
-			log.Fatal("accept error:", err)
+			logrus.Error(err)
+			continue
 		}
+
 		go rpc.ServeConn(conn)
+	}
+}
+
+func RunServerJsonCodec(network string, address string, svc Service) error {
+	err := registerService(svc)
+	if err != nil {
+		return err
+	}
+
+	lis, err := net.Listen(network, address)
+	if err != nil {
+		return err
+	}
+	defer lis.Close()
+
+	logrus.Infof("Start echo service at %s", address)
+	for {
+		conn, err := lis.Accept()
+		if err != nil {
+			logrus.Error(err)
+			continue
+		}
+
+		go rpc.ServeCodec(jsonrpc.NewServerCodec(conn))
 	}
 }
