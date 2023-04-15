@@ -75,7 +75,7 @@ func (enc *Encoder) Encode(w io.Writer, methodName string, params any) error {
 
 	ignoreWriteError(buf, "</methodCall>")
 
-	return nil
+	return buf.Flush()
 }
 
 func (enc *Encoder) marshal(v any) ([]byte, error) {
