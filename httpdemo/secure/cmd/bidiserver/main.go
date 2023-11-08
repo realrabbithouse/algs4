@@ -8,7 +8,6 @@ import (
 	"io/ioutil"
 	"net"
 
-	"algs4/config"
 	"github.com/sirupsen/logrus"
 )
 
@@ -36,7 +35,7 @@ func main() {
 		InsecureSkipVerify: false,
 		ServerName:         "example", // client cert common name
 	}
-	ln, err := tls.Listen("tcp", config.TestHost, cfg)
+	ln, err := tls.Listen("tcp", "localhost:9973", cfg)
 	if err != nil {
 		logrus.Fatal(err)
 	}

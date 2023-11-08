@@ -5,13 +5,12 @@ import (
 	"io"
 	"os"
 
-	"algs4/config"
-	"algs4/rpcplay/echo"
+	"algs4/rpcdemo/echo"
 	"github.com/sirupsen/logrus"
 )
 
 func main() {
-	cli, err := echo.NewClient(config.TCP, config.TestHost)
+	cli, err := echo.NewClient("tcp", "localhost:9973")
 	if err != nil {
 		logrus.Fatal(err)
 	}

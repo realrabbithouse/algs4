@@ -6,7 +6,6 @@ import (
 	"crypto/x509"
 	"io/ioutil"
 
-	"algs4/config"
 	"github.com/sirupsen/logrus"
 )
 
@@ -33,7 +32,7 @@ func main() {
 		ServerName:         "rabbit.com", // server cert common name
 	}
 
-	conn, err := tls.Dial("tcp", config.TestHost, cfg)
+	conn, err := tls.Dial("tcp", "localhost:9973", cfg)
 	if err != nil {
 		logrus.Fatal(err)
 	}

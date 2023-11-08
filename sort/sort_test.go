@@ -1,9 +1,10 @@
 package sort
 
 import (
+	"math/rand"
 	"testing"
+	"time"
 
-	"algs4/fileops"
 	"algs4/typ"
 	"github.com/stretchr/testify/require"
 )
@@ -29,7 +30,7 @@ func TestSelectionSort(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sli := typ.IntSlice(fileops.GenRandomNums(tt.max, tt.count))
+			sli := typ.IntSlice(GenRandomNums(tt.max, tt.count))
 			if tt.count > 1 {
 				require.False(t, sli.IsSorted())
 			}
@@ -60,7 +61,7 @@ func TestInsertionSort(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sli := typ.IntSlice(fileops.GenRandomNums(tt.max, tt.count))
+			sli := typ.IntSlice(GenRandomNums(tt.max, tt.count))
 			if tt.count > 1 {
 				require.False(t, sli.IsSorted())
 			}
@@ -91,7 +92,7 @@ func TestBubbleSort(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sli := typ.IntSlice(fileops.GenRandomNums(tt.max, tt.count))
+			sli := typ.IntSlice(GenRandomNums(tt.max, tt.count))
 			if tt.count > 1 {
 				require.False(t, sli.IsSorted())
 			}
@@ -122,7 +123,7 @@ func TestShellSort(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sli := typ.IntSlice(fileops.GenRandomNums(tt.max, tt.count))
+			sli := typ.IntSlice(GenRandomNums(tt.max, tt.count))
 			if tt.count > 1 {
 				require.False(t, sli.IsSorted())
 			}
@@ -153,7 +154,7 @@ func TestMergeSort(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sli := typ.IntSlice(fileops.GenRandomNums(tt.max, tt.count))
+			sli := typ.IntSlice(GenRandomNums(tt.max, tt.count))
 			if tt.count > 1 {
 				require.False(t, sli.IsSorted())
 			}
@@ -184,7 +185,7 @@ func TestQuick(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			sli := typ.IntSlice(fileops.GenRandomNums(tt.max, tt.count))
+			sli := typ.IntSlice(GenRandomNums(tt.max, tt.count))
 			if tt.count > 1 {
 				require.False(t, sli.IsSorted())
 			}
@@ -215,7 +216,7 @@ func TestMaxPQ_IsMaxHeap(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			input := typ.IntSlice(fileops.GenRandomNums(40000000, 20000000))
+			input := typ.IntSlice(GenRandomNums(40000000, 20000000))
 			keys := make([]typ.Comparable, len(input))
 			for i := range input {
 				keys[i] = typ.ComparableInt(input[i])
@@ -316,7 +317,7 @@ func TestMinPQ_IsMinHeap(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			input := typ.IntSlice(fileops.GenRandomNums(40000000, 20000000))
+			input := typ.IntSlice(GenRandomNums(40000000, 20000000))
 			keys := make([]typ.Comparable, len(input))
 			for i := range input {
 				keys[i] = typ.ComparableInt(input[i])
@@ -421,7 +422,7 @@ func TestHeap(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			input := typ.IntSlice(fileops.GenRandomNums(tt.max, tt.count))
+			input := typ.IntSlice(GenRandomNums(tt.max, tt.count))
 			keys := make([]typ.Comparable, len(input))
 			for i := range input {
 				keys[i] = typ.ComparableInt(input[i])
@@ -431,4 +432,13 @@ func TestHeap(t *testing.T) {
 			require.True(t, h.IsSorted())
 		})
 	}
+}
+
+func GenRandomNums(max, count int) []int {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	ret := make([]int, count)
+	for i := 0; i < count; i++ {
+		ret[i] = rand.Intn(max)
+	}
+	return ret
 }

@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"time"
 
-	"algs4/config"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/http2"
 )
@@ -31,7 +30,7 @@ func main() {
 
 	client := &http.Client{Transport: t}
 
-	res, err := client.Get("https://" + config.TestHost)
+	res, err := client.Get("https://" + "localhost:9973")
 	if err != nil {
 		logrus.Fatal(err)
 	}

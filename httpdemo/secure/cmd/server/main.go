@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"time"
 
-	"algs4/config"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/http2"
 )
@@ -18,7 +17,7 @@ func main() {
 	flag.Parse()
 
 	server := &http.Server{
-		Addr:         config.TestHost,
+		Addr:         "localhost:9973",
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		TLSConfig:    tlsConfig(),

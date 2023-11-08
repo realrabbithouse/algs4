@@ -17,7 +17,7 @@ func Simple(stream []int, k int) (r []int) { // k > 0 && k < len(stream)
 	}
 	r = make([]int, k)
 	var i int
-	rand.Seed(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	for i = 0; i < k; i++ {
 		r[i] = stream[i]
 	}
