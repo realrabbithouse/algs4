@@ -1,7 +1,5 @@
 package st
 
-import "fmt"
-
 type Node struct {
 	key   Key
 	value Value
@@ -146,6 +144,15 @@ func (bst BST) Max() Key {
 	return max(bst.root).key
 }
 
+// deleteKey removes the node with the specified key from the binary search tree.
+// It returns the new root of the subtree after deletion.
+//
+// Parameters:
+//   - node: The root of the subtree from which the key should be deleted.
+//   - key: The key of the node to be deleted.
+//
+// Returns:
+//   - *Node: The new root of the subtree after the key has been deleted. If the key is not found, it returns the original node.
 func deleteKey(node *Node, key Key) *Node {
 	if node == nil {
 		return nil
@@ -301,50 +308,8 @@ func keys(node *Node, lo, hi Key, sli *[]Key) {
 	}
 }
 
-func (bst BST) ToSlice() []Key {
+func (bst BST) GetKeys() []Key {
 	sli := make([]Key, 0, bst.Size())
 	keys(bst.root, bst.Min(), bst.Max(), &sli)
 	return sli
-}
-
-// preOrder 指先访问根，然后访问子树的遍历方式
-func preOrder(node *Node) {
-	if node == nil {
-		return
-	}
-	fmt.Println(node.key, node.value)
-	preOrder(node.left)
-	preOrder(node.right)
-}
-
-func (bst BST) PreOrder() {
-	preOrder(bst.root)
-}
-
-// inOrder 指先访问左（右）子树，然后访问根，最后访问右（左）子树的遍历方式
-func inOrder(node *Node) {
-	if node == nil {
-		return
-	}
-	inOrder(node.left)
-	fmt.Println(node.key, node.value)
-	inOrder(node.right)
-}
-
-func (bst BST) InOrder() {
-	inOrder(bst.root)
-}
-
-// postOrder 指先访问子树，然后访问根的遍历方式
-func postOrder(node *Node) {
-	if node == nil {
-		return
-	}
-	postOrder(node.left)
-	postOrder(node.right)
-	fmt.Println(node.key, node.value)
-}
-
-func (bst BST) PostOrder() {
-	postOrder(bst.root)
 }
